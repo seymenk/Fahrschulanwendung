@@ -1,0 +1,62 @@
+package softwaretechnik2.fahrschulanwendung.autoverwaltung.anwendungsschicht;
+
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "@class")
+@JsonSubTypes({
+        @JsonSubTypes.Type(value = ManuellDTO.class, name = "softwaretechnik2.fahrschule.swt.autoverwaltung.ManuellDTO"),
+        @JsonSubTypes.Type(value = AutomatikDTO.class, name = "softwaretechnik2.fahrschule.swt.autoverwaltung.AutomatikDTO") })
+
+public abstract class AutoDTO {
+	private Long id;
+	private String marke;
+	private String modell;
+	private Integer baujahr;
+	private String farbe;
+	private Float preis;
+	private String getriebe;
+	
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
+	public String getMarke() {
+		return marke;
+	}
+	public void setMarke(String marke) {
+		this.marke = marke;
+	}
+	public String getModell() {
+		return modell;
+	}
+	public void setModell(String modell) {
+		this.modell = modell;
+	}
+	public Integer getBaujahr() {
+		return baujahr;
+	}
+	public void setBaujahr(Integer baujahr) {
+		this.baujahr = baujahr;
+	}
+	public String getFarbe() {
+		return farbe;
+	}
+	public void setFarbe(String farbe) {
+		this.farbe = farbe;
+	}
+	public Float getPreis() {
+		return preis;
+	}
+	public void setPreis(Float preis) {
+		this.preis = preis;
+	}
+	public String getGetriebe() {
+		return getriebe;
+	}
+	public void setGetriebe(String getriebe) {
+		this.getriebe = getriebe;
+	}
+}

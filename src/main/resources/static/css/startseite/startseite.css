@@ -1,0 +1,280 @@
+html {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 16px;
+}
+
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 5rem;
+  background-color: #ffffff;
+  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.29);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 20px;
+  padding-right: 20px;
+  box-sizing: border-box;
+  z-index: 2;
+}
+
+.left,
+.middle,
+.right {
+  display: flex;
+  align-items: center;
+  flex-grow: 1;
+}
+
+.left {
+  justify-content: flex-start;
+}
+
+.middle {
+  justify-content: center;
+}
+
+.middle .nav-button.active {
+  position: relative;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.middle .nav-button.active::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -5px;
+  width: 100%;
+  height: 2px;
+  background-color: black;
+}
+
+.nav-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 8px;
+  margin-right: 2rem;
+  outline: none;
+  transition: color 0.3s;
+}
+
+.nav-button:hover,
+.nav-button.active:hover {
+  font-weight: 600;
+}
+
+.nav-button:last-child {
+  margin-right: 0;
+}
+
+.right {
+  justify-content: flex-end;
+}
+
+.profile-picture {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.body {
+  margin-top: 5.2rem;
+}
+
+.card1 {
+  position: relative;
+  width: 100%;
+  height: 40vh;
+  font-family: "Roboto", Arial, Helvetica, sans-serif;
+  overflow: hidden;
+}
+
+.content-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.bg-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-position: center;
+  background-size: cover;
+  filter: blur(1.3px);
+  opacity: 0.8;
+  z-index: -1;
+}
+
+.text-card1 {
+  position: relative;
+  z-index: 1;
+  color: #ffffff;
+  padding: 20px;
+  max-width: 95%;
+  font-size: 1.4rem;
+  line-height: 1.6;
+  font-weight: 300;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 5px;
+  position: absolute;
+  top: 50%;
+  left: 20px;
+  transform: translateY(-50%);
+}
+
+.text-card1 h2 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+.slider {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-position: center;
+  background-size: cover;
+  opacity: 0;
+  transition: opacity 1s;
+}
+
+.slide.active {
+  opacity: 1;
+}
+.slide-info {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  opacity: 0;
+  transition: opacity 1s;
+  z-index: 1; /* Set a lower z-index */
+}
+
+.slide-info h3 {
+  color: #ffffff;
+  font-size: 2rem;
+  font-weight: 600;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.slide-info.active {
+  opacity: 1;
+}
+
+.arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+  color: white;
+  z-index: 1;
+  padding: 8px;
+  outline: none;
+  opacity: 0.7;
+}
+
+.arrow:hover {
+  opacity: 1;
+}
+
+.arrow-left {
+  left: 10px;
+}
+
+.arrow-right {
+  right: 10px;
+}
+
+.dots {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  background-color: white;
+  border-radius: 50%;
+  margin: 0 5px;
+  cursor: pointer;
+  opacity: 0.5;
+}
+
+.dot:hover,
+.dot.active {
+  opacity: 1;
+}
+
+.card2 {
+  height: 80vh;
+  background-color: black;
+}
+
+.card3 {
+  height: 40vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+h1 {
+  position: absolute;
+  top: 0;
+  margin-top: 1rem;
+}
+
+.circle-container {
+  display: flex;
+  justify-content: center;
+  gap: 10rem;
+}
+
+.circle {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.circle img {
+  border-radius: 50%;
+  overflow: hidden;
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+}
+
+.circle p {
+  margin-top: 10px;
+  text-align: center;
+}

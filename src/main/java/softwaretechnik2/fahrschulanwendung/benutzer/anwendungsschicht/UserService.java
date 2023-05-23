@@ -1,0 +1,89 @@
+package softwaretechnik2.fahrschulanwendung.benutzer.anwendungsschicht;
+
+import java.util.Optional;
+
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import jakarta.transaction.Transactional;
+import softwaretechnik2.fahrschulanwendung.benutzer.datenschicht.BenutzerverwaltungFassade;
+import softwaretechnik2.fahrschulanwendung.benutzer.datenschicht.User;
+import softwaretechnik2.fahrschulanwendung.passwort.anwendungsschicht.PasswortGenerator;
+
+@Service
+public class UserService {
+
+	@Autowired
+	BenutzerverwaltungFassade benutzerverwaltungFassade;
+	 
+	private ModelMapper modelMapper;
+
+	private PasswortGenerator pwg;
+
+	public UserService() {
+		this.pwg = new PasswortGenerator();
+		this.modelMapper = new ModelMapper();
+	}
+	
+	private UserDTO convertToDTO(User user) {
+        return modelMapper.map(user, UserDTO.class);
+    }
+	
+	public User convertToEntity(UserDTO userDTO) {
+	    return modelMapper.map(userDTO, User.class);
+	}
+
+	public User authenticate(String username, String password) {
+		return benutzerverwaltungFassade.findByUsernameAndPassword(username, password);
+	}
+
+	public UserDTO createBenutzerkonto(String vorname, String nachname) {
+		User benutzerkonto = new User();
+		String username = vorname.substring(0, 1).toLowerCase() + nachname.toLowerCase();
+		String uniqueUsername = getUniqueUsername(username);
+		benutzerkonto.setUsername(uniqueUsername);
+		benutzerkonto.setPassword(pwg.generateRandomPassword());
+		return convertToDTO(benutzerverwaltungFassade.saveUser(benutzerkonto));
+	}
+
+	private String getUniqueUsername(String username) {
+        String newUsername = username;
+        int num = 1;
+        while (benutzerverwaltungFassade.existsByUsername(newUsername)) {
+            newUsername = username + String.format("%03d", num);
+            num++;
+        }
+        return newUsername;
+    }
+
+    public UserDTO save(User benutzerkonto) {
+        return convertToDTO(benutzerverwaltungFassade.saveUser(benutzerkonto));
+    }
+
+    @Transactional
+    public void deleteBenutzerByBenutzername(String benutzername) {
+        Optional<User> benutzer = benutzerverwaltungFassade.findByUsername(benutzername);
+        if (benutzer.isPresent()) {
+            User user = benutzer.get();
+
+            if (user.getFsID() != null) {
+                benutzerverwaltungFassade.deleteFahrschuelerById(user.getFsID());
+            } else if (user.getFlID() != null) {
+                benutzerverwaltungFassade.deleteFahrlehrerById(user.getFlID());
+            }
+
+            benutzerverwaltungFassade.deleteUser(user);
+        }
+    }
+
+    public boolean changePassword(String username, String oldPassword, String newPassword) {
+        User user = benutzerverwaltungFassade.findByUsernameAndPassword(username, oldPassword);
+        if (user != null) {
+            user.setPassword(newPassword);
+            benutzerverwaltungFassade.saveUser(user);
+            return true;
+        }
+        return false;
+    }
+}

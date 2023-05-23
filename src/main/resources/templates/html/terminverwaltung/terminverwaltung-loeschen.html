@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Termin löschen</title>
+	<link rel="stylesheet" href="css/terminverwaltung/terminverwaltung-loeschen.css" />
+</head>
+
+<body>
+	<div class="header">
+		<div class="left">
+			<img src="path/to/your/profile-picture" alt="Profilbild" class="profile-picture" />
+		</div>
+		<div class="middle">
+			<button class="nav-button">Startseite</button>
+			<button class="nav-button">Benutzerverwaltung</button>
+			<button class="nav-button">Autoverwaltung</button>
+			<button class="nav-button active">Terminverwaltung</button>
+		</div>
+		<div class="right">
+			<button class="nav-button">Konto</button>
+			<button class="nav-button">AGB</button>
+			<button class="nav-button">Impressum</button>
+		</div>
+	</div>
+	<div class="body">
+		<div class="ueberschrift">
+			<h1>Termin löschen</h1>
+		</div>
+		<form id="termin-form">
+			<div class="form-group">
+				<label for="id">Termin ID:</label>
+				<input type="text" id="id" name="id" required />
+			</div>
+			<button type="submit" onclick="onDeleteTermin(event)">Löschen</button>
+		</form>
+	</div>
+	<script src="javascript/anwendungsschicht/navigation/navigation.js"></script>
+	<script src="javascript/anwendungsschicht/terminverwaltung/anwendungsschicht-terminverwaltung-loeschen.js"></script>
+	<script src="javascript/datenschicht/terminverwaltung/datenschicht-terminverwaltung-loeschen.js"></script>
+</body>
+
+</html>

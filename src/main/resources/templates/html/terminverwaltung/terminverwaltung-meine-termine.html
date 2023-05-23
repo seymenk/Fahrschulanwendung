@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Timeslot erstellen</title>
+    <link
+      rel="stylesheet"
+      href="css/terminverwaltung/terminverwaltung-meine-termine.css"
+    />
+  </head>
+  <body>
+    <div class="header">
+      <div class="left">
+        <img
+          src="path/to/your/profile-picture"
+          alt="Profilbild"
+          class="profile-picture"
+        />
+      </div>
+      <div class="middle">
+        <button class="nav-button">Startseite</button>
+        <button class="nav-button">Benutzerverwaltung</button>
+        <button class="nav-button">Autoverwaltung</button>
+        <button class="nav-button active">Terminverwaltung</button>
+      </div>
+      <div class="right">
+        <button class="nav-button">Konto</button>
+        <button class="nav-button">AGB</button>
+        <button class="nav-button">Impressum</button>
+      </div>
+    </div>
+    <div class="body">
+      <h1>Meine Termine</h1>
+      <div id="liste-meine-termine" class="liste-meine-termine"></div>
+      <p id="results"></p>
+    </div>
+    <script src="javascript/anwendungsschicht/navigation/navigation.js"></script>
+    <script src="javascript/anwendungsschicht/terminverwaltung/anwendungsschicht-terminverwaltung-meine-termine.js"></script>
+    <script src="javascript/datenschicht/terminverwaltung/datenschicht-terminverwaltung-meine-termine.js"></script>
+    <script src="javascript/praesentationsschicht/terminverwaltung/praesentationsschicht-terminverwaltung-meine-termine.js"></script>
+  </body>
+</html>

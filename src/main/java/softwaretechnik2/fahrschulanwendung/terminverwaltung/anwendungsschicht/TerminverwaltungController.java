@@ -1,0 +1,181 @@
+package softwaretechnik2.fahrschulanwendung.terminverwaltung.anwendungsschicht;
+
+import java.time.LocalDate;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.stream.Collectors;
+
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
+import softwaretechnik2.fahrschulanwendung.session.anwendungsschicht.SessionInterceptor;
+import softwaretechnik2.fahrschulanwendung.terminverwaltung.datenschicht.Termin;
+import softwaretechnik2.fahrschulanwendung.terminverwaltung.datenschicht.TerminDAO;
+
+@Controller
+public class TerminverwaltungController {
+
+	private final SessionInterceptor sessionInterceptor;
+	private final ModelMapper modelMapper = new ModelMapper();
+
+	@Autowired
+	private HttpSession httpSession;
+
+	// Konstruktorinjektion
+	@Autowired
+	public TerminverwaltungController(SessionInterceptor sessionInterceptor) {
+		this.sessionInterceptor = sessionInterceptor;
+	}
+
+	@GetMapping("/terminverwaltung")
+	public String terminverwaltung(HttpSession session, HttpServletRequest request) {
+		if (sessionInterceptor.hasUserRole(request, "fahrlehrer"))
+			return "terminverwaltung/terminverwaltung";
+		else
+			return "redirect:/startseite";
+	}
+
+	@GetMapping("/terminverwaltung-timeslot-erstellen")
+	public String terminverwaltungTimeslotErstellen(HttpSession session, HttpServletRequest request) {
+		if (sessionInterceptor.hasUserRole(request, "fahrlehrer"))
+			return "terminverwaltung/terminverwaltung-timeslot-erstellen";
+		else
+			return "redirect:/startseite";
+	}
+
+	@GetMapping("/terminverwaltung-meine-termine")
+	public String terminverwaltungMeineTermine(HttpSession session, HttpServletRequest request) {
+		if (sessionInterceptor.hasUserRole(request, "fahrlehrer"))
+			return "terminverwaltung/terminverwaltung-meine-termine";
+		else
+			return "redirect:/startseite";
+	}
+
+	@GetMapping("/terminverwaltung-alle-termine")
+	public String terminverwaltungAlleTermine(HttpSession session, HttpServletRequest request) {
+		if (sessionInterceptor.hasUserRole(request, "fahrlehrer"))
+			return "terminverwaltung/terminverwaltung-alle-termine";
+		else
+			return "redirect:/startseite";
+	}
+
+	@GetMapping("/terminverwaltung-loeschen")
+	public String terminverwaltungLoeschen(HttpSession session, HttpServletRequest request) {
+		if (sessionInterceptor.hasUserRole(request, "fahrlehrer"))
+			return "terminverwaltung/terminverwaltung-loeschen";
+		else
+			return "redirect:/startseite";
+	}
+
+	@GetMapping("/terminverwaltung-schueler")
+	public String terminverwaltungSchueler(HttpSession session, HttpServletRequest request) {
+		if (sessionInterceptor.hasUserRole(request, "fahrschueler"))
+			return "terminverwaltung/terminverwaltung-schueler";
+		else
+			return "redirect:/startseite";
+	}
+
+	private int getFahrlehrerID() {
+		return ((Long) httpSession.getAttribute("fahrlehrerID")).intValue();
+	}
+
+	private int getFahrschuelerID() {
+		return ((Long) httpSession.getAttribute("fahrschuelerID")).intValue();
+	}
+
+	@Autowired
+	TerminService terminService;
+
+	@Autowired
+	TerminDAO terminDAO;
+
+	@PostMapping("/terminslots")
+	public ResponseEntity<String> addTerminSlots(@RequestBody List<TerminDTO> terminDTOs) {
+		List<Termin> terminObjekte = terminDTOs.stream().map(terminDTO -> modelMapper.map(terminDTO, Termin.class))
+				.collect(Collectors.toList());
+		terminService.saveTerminSlots(terminObjekte, getFahrlehrerID());
+
+		return new ResponseEntity<>("Terminslots erfolgreich hinzugefügt", HttpStatus.CREATED);
+	}
+
+	@DeleteMapping("/termin/{id}")
+	public ResponseEntity<?> deleteTermin(@PathVariable Long id) {
+		Optional<Termin> existing = terminDAO.findById(id);
+		if (existing.isPresent()) {
+			terminService.deleteTermin(id);
+			return ResponseEntity.ok().build();
+		} else {
+			return ResponseEntity.notFound().build();
+		}
+	}
+
+	@GetMapping("/get-meine-termine")
+	public ResponseEntity<List<TerminDTO>> getMeineTermine() {
+		try {
+			int fahrlehrerID = getFahrlehrerID();
+			List<Termin> termine = terminDAO.findByFahrlehrerID(fahrlehrerID);
+			List<TerminDTO> terminDTOs = termine.stream().map(termin -> modelMapper.map(termin, TerminDTO.class))
+					.collect(Collectors.toList());
+			return new ResponseEntity<>(terminDTOs, HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+
+	@GetMapping("/get-alle-termine")
+	public ResponseEntity<List<TerminDTO>> getAlleTermine() {
+		try {
+			List<Termin> termine = terminDAO.findAll();
+			List<TerminDTO> terminDTOs = termine.stream().map(termin -> modelMapper.map(termin, TerminDTO.class))
+					.collect(Collectors.toList());
+			return new ResponseEntity<>(terminDTOs, HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+
+	@PostMapping("/getIDandDate")
+	public ResponseEntity<List<TerminDTO>> handleIDandDate(@RequestBody Map<String, Object> requestData) {
+		Long id = Long.parseLong(requestData.get("fahrlehrerID").toString());
+		LocalDate date = LocalDate.parse(requestData.get("date").toString());
+
+		return getTimeslotsByIDAndDate(id, date);
+	}
+
+	private ResponseEntity<List<TerminDTO>> getTimeslotsByIDAndDate(Long id, LocalDate date) {
+		List<Termin> termine = terminDAO.findByFahrlehrerIDAndDatumAndGebuchtFalse(id, date);
+		List<TerminDTO> terminDTOs = termine.stream().map(termin -> modelMapper.map(termin, TerminDTO.class))
+				.collect(Collectors.toList());
+		return new ResponseEntity<>(terminDTOs, HttpStatus.OK);
+	}
+
+	@PostMapping("/bookTermin")
+	public ResponseEntity<?> bookTermin(@RequestBody TerminDTO terminDTO, HttpSession session) {
+	    int terminID = terminDTO.getId();
+
+	    try {
+	        Termin termin = terminDAO.findById(terminID);
+	        if (termin != null) {
+	            termin.setGebucht(true);
+	            termin.setFahrschuelerID(getFahrschuelerID());
+	            terminDAO.save(termin);
+	            return ResponseEntity.ok().body(Map.of("success", true));
+	        } else {
+	            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Map.of("success", false));
+	        }
+	    } catch (Exception e) {
+	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Map.of("success", false));
+	    }
+	}
+}

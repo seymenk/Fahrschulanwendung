@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Passwort ändern</title>
+    <link
+      rel="stylesheet"
+      href="css/benutzerverwaltung/benutzerverwaltung-aendern.css"
+    />
+    <script src="javascript/anwendungsschicht/navigation/navigation.js"></script>
+    <script src="javascript/anwendungsschicht/benutzerverwaltung/anwendungsschicht-benutzerverwaltung-aendern.js"></script>
+    <script src="javascript/datenschicht/benutzerverwaltung/datenschicht-benutzerverwaltung-aendern.js"></script>
+  </head>
+  <body>
+    <div class="header">
+      <div class="left">
+        <img
+          src="path/to/your/profile-picture"
+          alt="Profilbild"
+          class="profile-picture"
+        />
+      </div>
+      <div class="middle">
+        <button class="nav-button">Startseite</button>
+        <button class="nav-button active">Benutzerverwaltung</button>
+        <button class="nav-button">Autoverwaltung</button>
+        <button class="nav-button">Terminverwaltung</button>
+      </div>
+      <div class="right">
+        <button class="nav-button">Konto</button>
+        <button class="nav-button">AGB</button>
+        <button class="nav-button">Impressum</button>
+      </div>
+    </div>
+    <div class="body">
+      <div class="ueberschrift">
+        <h1>Passwort ändern</h1>
+      </div>
+      <form id="user-form">
+        <div class="form-group">
+          <label for="benutzername">Benutzername:</label>
+          <input type="text" id="benutzername" name="benutzername" required />
+        </div>
+        <div class="form-group">
+          <label for="altes_passwort">Altes Passwort:</label>
+          <input
+            type="password"
+            id="altes_passwort"
+            name="altes_passwort"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="neues_passwort">Neues Passwort:</label>
+          <input
+            type="password"
+            id="neues_passwort"
+            name="neues_passwort"
+            required
+          />
+        </div>
+        <button type="submit">Speichern</button>
+      </form>
+    </div>
+  </body>
+</html>

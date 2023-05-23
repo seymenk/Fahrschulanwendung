@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Timeslot erstellen</title>
+    <link
+      rel="stylesheet"
+      href="css/terminverwaltung/terminverwaltung-timeslot-erstellen.css"
+    />
+  </head>
+
+  <body>
+    <div class="header">
+      <div class="left">
+        <img
+          src="path/to/your/profile-picture"
+          alt="Profilbild"
+          class="profile-picture"
+        />
+      </div>
+      <div class="middle">
+        <button class="nav-button">Startseite</button>
+        <button class="nav-button">Benutzerverwaltung</button>
+        <button class="nav-button">Autoverwaltung</button>
+        <button class="nav-button active">Terminverwaltung</button>
+      </div>
+      <div class="right">
+        <button class="nav-button">Konto</button>
+        <button class="nav-button">AGB</button>
+        <button class="nav-button">Impressum</button>
+      </div>
+    </div>
+    <div class="body">
+      <h1>Terminslot erstellen</h1>
+      <button id="add-card-btn">Neue Timeslot-Card hinzufügen</button>
+      <div id="cards-container"></div>
+      <button type="submit" id="submit-timeslots">Timeslots hinzufügen</button>
+    </div>
+    <script src="javascript/anwendungsschicht/navigation/navigation.js"></script>
+    <script src="javascript/anwendungsschicht/terminverwaltung/anwendungsschicht-terminverwaltung-timeslot-erstellen.js"></script>
+    <script src="javascript/datenschicht/terminverwaltung/datenschicht-terminverwaltung-timeslot-erstellen.js"></script>
+    <script src="javascript/praesentationsschicht/terminverwaltung/praesentationsschicht-terminverwaltung-timeslot-erstellen.js"></script>
+  </body>
+</html>

@@ -61,8 +61,8 @@ public class FahrschuelerController {
 	private UserService benutzerkontoService;
 
 	@PostMapping("/create-fahrschueler")
-	public ResponseEntity<FahrschuelerDTO> createFahrschueler(@RequestBody FahrschuelerDTO fahrschuelerDTO) {
-	    Fahrschueler fahrschueler = modelMapper.map(fahrschuelerDTO, Fahrschueler.class);
+	public ResponseEntity<UserCreationResponseDTO> createFahrschueler(@RequestBody UserCreationDTO userCreationDTO) {
+	    Fahrschueler fahrschueler = modelMapper.map(userCreationDTO, Fahrschueler.class);
 	    Fahrschueler savedFahrschueler = fahrschuelerDAO.save(fahrschueler);
 
 	    UserDTO userDTO = benutzerkontoService.createBenutzerkonto(fahrschueler.getVorname(), fahrschueler.getNachname());
@@ -71,8 +71,12 @@ public class FahrschuelerController {
 	    benutzerkonto.setFsID(savedFahrschueler.getId());
 	    benutzerkontoService.save(benutzerkonto);
 
-	    FahrschuelerDTO savedFahrschuelerDTO = modelMapper.map(savedFahrschueler, FahrschuelerDTO.class);
-	    return ResponseEntity.ok(savedFahrschuelerDTO);
+	    UserCreationResponseDTO responseDTO = new UserCreationResponseDTO();
+		responseDTO.setId(savedFahrschueler.getId());
+		responseDTO.setVorname(fahrschueler.getVorname());
+		responseDTO.setNachname(fahrschueler.getNachname());
+		responseDTO.setRole("Fahrschüler");
+		return ResponseEntity.ok(responseDTO);
 	}
 
 }

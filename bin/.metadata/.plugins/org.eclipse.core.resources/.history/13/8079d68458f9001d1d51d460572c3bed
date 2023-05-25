@@ -1,0 +1,59 @@
+package softwaretechnik2.fahrschulanwendung.benutzerverwaltung.anwendungsschicht;
+
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import softwaretechnik2.fahrschulanwendung.benutzer.anwendungsschicht.UserService;
+import softwaretechnik2.fahrschulanwendung.benutzer.datenschicht.User;
+import softwaretechnik2.fahrschulanwendung.benutzer.datenschicht.UserRepository;
+import softwaretechnik2.fahrschulanwendung.session.anwendungsschicht.SessionInterceptor;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
+public abstract class BaseController<T, D> {
+
+    @Autowired
+    protected UserService benutzerkontoService;
+
+    @Autowired
+    protected ModelMapper modelMapper;
+
+    @Autowired
+    protected UserRepository<T> repository;
+
+    @Autowired
+    protected SessionInterceptor sessionInterceptor;
+
+    @ResponseBody
+    public List<D> searchApi(
+            @RequestParam(value = "vorname", required = false, defaultValue = "") String vorname,
+            @RequestParam(value = "nachname", required = false, defaultValue = "") String nachname) {
+
+        if (vorname.isEmpty() && nachname.isEmpty()) {
+            return new ArrayList<>();
+        }
+        List<T> userList = repository.findBySearchTerm(vorname, nachname);
+        return userList.stream().map(user -> modelMapper.map(user, (Class<D>) user.getClass()))
+                .collect(Collectors.toList());
+    }
+
+    public ResponseEntity<D> createUser(@RequestBody D userDTO) {
+        T user = modelMapper.map(userDTO, (Class<T>) userDTO.getClass());
+        T savedUser = repository.save(user);
+
+        UserDTO userDto = benutzerkontoService.createBenutzerkonto(savedUser.getVorname(), savedUser.getNachname());
+        User benutzerkonto = benutzerkontoService.convertToEntity(userDto);
+        
+        benutzerkonto.setId(savedUser.getId());  // method name might differ based on your user class design
+        benutzerkontoService.save(benutzerkonto);
+
+        D savedUserDTO = modelMapper.map(savedUser, (Class<D>) userDTO.getClass());
+        return ResponseEntity.ok(savedUserDTO);
+    }
+
+}

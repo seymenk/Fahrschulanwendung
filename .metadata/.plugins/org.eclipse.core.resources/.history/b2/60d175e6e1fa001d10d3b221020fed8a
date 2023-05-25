@@ -1,0 +1,47 @@
+package softwaretechnik2.fahrschulanwendung.benutzer.anwendungsschicht;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import softwaretechnik2.fahrschulanwendung.benutzer.datenschicht.User;
+import softwaretechnik2.fahrschulanwendung.benutzerverwaltung.anwendungsschicht.FahrlehrerFactory;
+import softwaretechnik2.fahrschulanwendung.benutzerverwaltung.anwendungsschicht.FahrschuelerFactory;
+
+@RestController
+@CrossOrigin(origins = "*")
+public class UserController {
+
+    @Autowired
+    UserService userService;
+
+    @DeleteMapping("/benutzer/{benutzername}")
+    public void deleteUser(@PathVariable String benutzername) {
+        userService.deleteBenutzerByBenutzername(benutzername);
+    }
+    
+    @PostMapping("/create-user/{role}")
+    public ResponseEntity<UserDTO> createUser(@RequestBody UserDTO userDTO, @RequestParam String role) {
+        UserFactory userFactory;
+        if (role.equals("Fahrschueler")) {
+            userFactory = new FahrschuelerFactory();
+        } else if (role.equals("Fahrlehrer")) {
+            userFactory = new FahrlehrerFactory();
+        } else {
+            throw new IllegalArgumentException("Invalid role");
+        }
+
+        UserDTO createdUserDTO = userFactory.createUser();
+        User benutzerkonto = userFactory.convertToEntity(createdUserDTO);
+        userService.save(benutzerkonto);
+
+        return ResponseEntity.ok(createdUserDTO);
+    }
+
+}

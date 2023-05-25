@@ -1,0 +1,5 @@
+package softwaretechnik2.fahrschulanwendung.benutzerverwaltung.anwendungsschicht;
+
+public class FahrschuelerFactory {
+
+}

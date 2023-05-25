@@ -1,0 +1,27 @@
+async function createUser(user, role) {
+    const data = JSON.stringify(user);
+    const url = new URL("/create-user");
+
+    url.searchParams.append('role', role);
+
+    console.log("Data:", data);
+    console.log("URL:", url.href);
+
+    const response = await fetch(url, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: data
+    });
+
+    console.log('Response Status:', response.status);
+    console.log('Response Status Text:', response.statusText);
+
+    if (!response.ok) {
+        const errorText = await response.text(); // or response.json(), depending on the response
+        console.log('Server Response:', errorText);
+    }
+
+    return response.ok;
+}

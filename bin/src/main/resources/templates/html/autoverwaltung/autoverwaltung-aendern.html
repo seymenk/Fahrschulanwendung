@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Auto ändern</title>
+    <link
+      rel="stylesheet"
+      href="css/autoverwaltung/autoverwaltung-aendern.css"
+    />
+    <script src="javascript/anwendungsschicht/navigation/navigation.js"></script>
+    <script src="javascript/anwendungsschicht/autoverwaltung/anwendungsschicht-autoverwaltung-aendern.js"></script>
+    <script src="javascript/datenschicht/autoverwaltung/datenschicht-autoverwaltung-aendern.js"></script>
+    <script src="javascript/praesentationsschicht/autoverwaltung/praesentationsschicht-autoverwaltung-aendern.js"></script>
+  </head>
+  <body>
+    <div class="header">
+      <div class="left">
+        <img
+          src="path/to/your/profile-picture"
+          alt="Profilbild"
+          class="profile-picture"
+        />
+      </div>
+      <div class="middle">
+        <button class="nav-button">Startseite</button>
+        <button class="nav-button">Benutzerverwaltung</button>
+        <button class="nav-button active">Autoverwaltung</button>
+        <button class="nav-button">Terminverwaltung</button>
+      </div>
+      <div class="right">
+        <button class="nav-button">Konto</button>
+        <button class="nav-button">AGB</button>
+        <button class="nav-button">Impressum</button>
+      </div>
+    </div>
+    <div class="body">
+      <div class="ueberschrift">
+        <h1>Auto ändern</h1>
+      </div>
+      <form id="auto-form">
+        <div class="form-group">
+          <label for="id">Auto ID:</label>
+          <input type="text" id="id" name="id" required />
+        </div>
+        <div class="form-group">
+          <label for="marke">Marke:</label>
+          <input type="text" id="marke" name="marke" />
+        </div>
+        <div class="form-group">
+          <label for="modell">Modell:</label>
+          <input type="text" id="modell" name="modell" />
+        </div>
+        <div class="form-group">
+          <label for="baujahr">Baujahr:</label>
+          <input type="number" id="baujahr" name="baujahr" />
+        </div>
+        <div class="form-group">
+          <label for="farbe">Farbe:</label>
+          <input type="text" id="farbe" name="farbe" />
+        </div>
+        <div class="form-group">
+          <label for="preis">Preis:</label>
+          <input type="number" id="preis" name="preis" />
+        </div>
+        <button type="submit">Ändern</button>
+      </form>
+    </div>
+  </body>
+</html>

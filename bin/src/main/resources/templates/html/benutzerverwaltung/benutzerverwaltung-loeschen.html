@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Benutzer löschen</title>
+    <link
+      rel="stylesheet"
+      href="css/benutzerverwaltung/benutzerverwaltung-loeschen.css"
+    />
+    <script src="javascript/anwendungsschicht/navigation/navigation.js"></script>
+    <script src="javascript/anwendungsschicht/benutzerverwaltung/anwendungsschicht-benutzerverwaltung-loeschen.js"></script>
+    <script src="javascript/datenschicht/benutzerverwaltung/datenschicht-benutzerverwaltung-loeschen.js"></script>
+  </head>
+  <body>
+    <div class="header">
+      <div class="left">
+        <img
+          src="path/to/your/profile-picture"
+          alt="Profilbild"
+          class="profile-picture"
+        />
+      </div>
+      <div class="middle">
+        <button class="nav-button">Startseite</button>
+        <button class="nav-button active">Benutzerverwaltung</button>
+        <button class="nav-button">Autoverwaltung</button>
+        <button class="nav-button">Terminverwaltung</button>
+      </div>
+      <div class="right">
+        <button class="nav-button">Konto</button>
+        <button class="nav-button">AGB</button>
+        <button class="nav-button">Impressum</button>
+      </div>
+    </div>
+    <div class="body">
+      <div class="ueberschrift">
+        <h1>Benutzer löschen</h1>
+      </div>
+      <form id="user-form">
+        <div class="form-group">
+          <label for="vorname">Benutzername:</label>
+          <input type="text" id="benutzername" name="benutzername" required />
+        </div>
+        <button type="submit">Löschen</button>
+      </form>
+    </div>
+  </body>
+</html>

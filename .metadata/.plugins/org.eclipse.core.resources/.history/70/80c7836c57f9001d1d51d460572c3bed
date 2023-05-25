@@ -1,0 +1,5 @@
+package softwaretechnik2.fahrschulanwendung.benutzer.datenschicht;
+
+public abstract class BaseController {
+
+}

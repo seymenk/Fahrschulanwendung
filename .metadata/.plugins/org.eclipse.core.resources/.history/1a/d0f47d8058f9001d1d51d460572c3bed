@@ -1,0 +1,31 @@
+package softwaretechnik2.fahrschulanwendung.benutzer.datenschicht;
+
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestBody;
+
+import softwaretechnik2.fahrschulanwendung.benutzer.anwendungsschicht.UserDTO;
+import softwaretechnik2.fahrschulanwendung.benutzerverwaltung.anwendungsschicht.FahrschuelerDTO;
+
+public abstract class BaseController<T, D> {
+	
+	@Autowired
+    protected ModelMapper modelMapper;
+
+	public ResponseEntity<FahrschuelerDTO> createFahrschueler(@RequestBody D dto) {
+	    T entity = modelMapper.map(dto, getEntityClass());
+	    T savedentity = fahrschuelerDAO.save(fahrschueler);
+
+	    UserDTO userDTO = benutzerkontoService.createBenutzerkonto(fahrschueler.getVorname(), fahrschueler.getNachname());
+	    User benutzerkonto = benutzerkontoService.convertToEntity(userDTO);
+
+	    benutzerkonto.setFsID(savedFahrschueler.getId());
+	    benutzerkontoService.save(benutzerkonto);
+
+	    FahrschuelerDTO savedFahrschuelerDTO = modelMapper.map(savedFahrschueler, FahrschuelerDTO.class);
+	    return ResponseEntity.ok(savedFahrschuelerDTO);
+	}
+	
+	protected abstract Class<T> getEntityClass();
+}

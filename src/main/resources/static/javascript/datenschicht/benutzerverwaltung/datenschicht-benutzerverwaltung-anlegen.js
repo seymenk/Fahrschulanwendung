@@ -1,4 +1,5 @@
 async function createUser(user, role) {
+	console.log("User object:", user);
 	let url;
 	if (role === "Fahrschüler") {
 		url = "/create-fahrschueler";

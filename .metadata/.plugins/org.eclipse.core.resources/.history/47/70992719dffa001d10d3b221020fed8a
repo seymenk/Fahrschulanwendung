@@ -1,0 +1,13 @@
+async function createUser(user, role) {
+    const response = await fetch("/create-user", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(user),
+        params: {
+            role: role
+        }
+    });
+    return response.ok;
+}

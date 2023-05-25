@@ -1,0 +1,34 @@
+package softwaretechnik2.fahrschulanwendung.benutzerverwaltung.anwendungsschicht;
+
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PostMapping;
+
+import softwaretechnik2.fahrschulanwendung.benutzer.anwendungsschicht.UserDTO;
+import softwaretechnik2.fahrschulanwendung.benutzer.anwendungsschicht.UserFactory;
+import softwaretechnik2.fahrschulanwendung.benutzer.datenschicht.Fahrschueler;
+import softwaretechnik2.fahrschulanwendung.benutzer.datenschicht.FahrschuelerDAO;
+import softwaretechnik2.fahrschulanwendung.benutzer.datenschicht.User;
+
+@Service
+public class FahrschuelerFactory implements UserFactory {
+    @Autowired
+    private FahrschuelerDAO fahrschuelerDAO;
+    @Autowired
+    private ModelMapper modelMapper;
+
+    @PostMapping("/create-user")
+    public UserDTO createUser() {
+        Fahrschueler fahrschueler = new Fahrschueler();
+        System.out.println(fahrschueler.getVorname() + fahrschueler.getGeburtsdatum());
+        Fahrschueler savedFahrschueler = fahrschuelerDAO.save(fahrschueler);
+        return modelMapper.map(savedFahrschueler, UserDTO.class);
+    }
+
+    public User convertToEntity(UserDTO userDTO) {
+        User user = modelMapper.map(userDTO, User.class);
+        user.setFsID(userDTO.getId());
+        return user;
+    }
+}

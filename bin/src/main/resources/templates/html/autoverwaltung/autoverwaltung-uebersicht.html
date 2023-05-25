@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Autoverwaltung</title>
+    <link
+      rel="stylesheet"
+      href="css/autoverwaltung/autoverwaltung-uebersicht.css"
+    />
+    <script src="javascript/anwendungsschicht/navigation/navigation.js"></script>
+    <script src="javascript/datenschicht/autoverwaltung/datenschicht-autoverwaltung-uebersicht.js"></script>
+    <script src="javascript/anwendungsschicht/autoverwaltung/anwendungsschicht-autoverwaltung-uebersicht.js"></script>
+    <script src="javascript/praesentationsschicht/autoverwaltung/praesentationsschicht-autoverwaltung-uebersicht.js"></script>
+  </head>
+  <body>
+    <div class="header">
+      <div class="left">
+        <img
+          src="path/to/your/profile-picture"
+          alt="Profilbild"
+          class="profile-picture"
+        />
+      </div>
+      <div class="middle">
+        <button class="nav-button">Startseite</button>
+        <button class="nav-button">Benutzerverwaltung</button>
+        <button class="nav-button active">Autoverwaltung</button>
+        <button class="nav-button">Terminverwaltung</button>
+      </div>
+      <div class="right">
+        <button class="nav-button">Konto</button>
+        <button class="nav-button">AGB</button>
+        <button class="nav-button">Impressum</button>
+      </div>
+    </div>
+    <div class="body">
+      <h1>Autos suchen</h1>
+      <p class="gefundene-autos">Gefundene Autos</p>
+      <div id="liste-autos" class="liste-autos"></div>
+      <p id="results"></p>
+    </div>
+  </body>
+</html>

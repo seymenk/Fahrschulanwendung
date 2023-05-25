@@ -1,0 +1,21 @@
+package softwaretechnik2.fahrschulanwendung.benutzerverwaltung.anwendungsschicht;
+
+@Service
+public class FahrschuelerFactory implements UserFactory {
+    @Autowired
+    private FahrschuelerDAO fahrschuelerDAO;
+    @Autowired
+    private ModelMapper modelMapper;
+
+    public UserDTO createUser(String vorname, String nachname) {
+        Fahrschueler fahrschueler = new Fahrschueler(vorname, nachname);
+        Fahrschueler savedFahrschueler = fahrschuelerDAO.save(fahrschueler);
+        return modelMapper.map(savedFahrschueler, UserDTO.class);
+    }
+
+    public User convertToEntity(UserDTO userDTO) {
+        User user = modelMapper.map(userDTO, User.class);
+        user.setFsID(userDTO.getId());
+        return user;
+    }
+}

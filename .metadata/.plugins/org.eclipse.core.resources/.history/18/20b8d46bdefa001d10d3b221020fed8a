@@ -1,0 +1,6 @@
+package softwaretechnik2.fahrschulanwendung.benutzer.anwendungsschicht;
+
+public interface UserFactory {
+	UserDTO createUser(String vorname, String nachname);
+    User convertToEntity(UserDTO userDTO);
+}

@@ -4,6 +4,11 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 
 import jakarta.persistence.*;
 
+/**
+ * Erbt von der Klasse Auto. Implementiert die Automatik Klasse mit Datenbankanbindung. Die Gegenklasse zu AutomatikDTO.
+ * @author seymen
+ *
+ */
 @Entity
 @DiscriminatorValue("Automatik")
 @JsonTypeName("softwaretechnik2.fahrschule.swt.autoverwaltung.Automatik")

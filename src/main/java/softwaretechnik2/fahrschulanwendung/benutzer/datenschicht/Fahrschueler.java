@@ -11,6 +11,11 @@ import softwaretechnik2.fahrschulanwendung.benutzerverwaltung.anwendungsschicht.
 
 import java.util.Date;
 
+/**
+ * Die Fahrlehrerklasse zum erstellen von Fahrschüler Instanzen. Mit Datenbankanbindung. Die Gegenklasse zu FahrschuelerDTO.
+ * @author seymen
+ *
+ */
 @Entity
 @Table(name = "Fahrschueler")
 public class Fahrschueler {

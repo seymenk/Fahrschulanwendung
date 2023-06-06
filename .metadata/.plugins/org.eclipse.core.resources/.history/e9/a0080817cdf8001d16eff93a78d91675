@@ -1,0 +1,97 @@
+package softwaretechnik2.fahrschulanwendung.benutzer.anwendungsschicht;
+
+import java.util.Optional;
+
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import jakarta.transaction.Transactional;
+import softwaretechnik2.fahrschule.swt.benutzer.datenschicht.FahrlehrerDAO;
+import softwaretechnik2.fahrschule.swt.benutzer.datenschicht.FahrschuelerDAO;
+import softwaretechnik2.fahrschule.swt.benutzer.datenschicht.User;
+import softwaretechnik2.fahrschule.swt.benutzer.datenschicht.UserDAO;
+import softwaretechnik2.fahrschule.swt.passwort.anwendungsschicht.PasswortGenerator;
+
+@Service
+public class UserService {
+
+	@Autowired
+	private UserDAO userDAO;
+
+	@Autowired
+	private FahrlehrerDAO fahrlehrerDAO;
+
+	@Autowired
+	private FahrschuelerDAO fahrschuelerDAO;
+	 
+	private ModelMapper modelMapper;
+
+	private PasswortGenerator pwg;
+
+	public UserService() {
+		this.pwg = new PasswortGenerator();
+		this.modelMapper = new ModelMapper();
+	}
+	
+	private UserDTO convertToDTO(User user) {
+        return modelMapper.map(user, UserDTO.class);
+    }
+	
+	public User convertToEntity(UserDTO userDTO) {
+	    return modelMapper.map(userDTO, User.class);
+	}
+
+	public User authenticate(String username, String password) {
+		return userDAO.findByUsernameAndPassword(username, password);
+	}
+
+	public UserDTO createBenutzerkonto(String vorname, String nachname) {
+		User benutzerkonto = new User();
+		String username = vorname.substring(0, 1).toLowerCase() + nachname.toLowerCase();
+		String uniqueUsername = getUniqueUsername(username);
+		benutzerkonto.setUsername(uniqueUsername);
+		benutzerkonto.setPassword(pwg.generateRandomPassword());
+		return convertToDTO(userDAO.save(benutzerkonto));
+	}
+
+	private String getUniqueUsername(String username) {
+		String newUsername = username;
+		int num = 1;
+		while (userDAO.existsByUsername(newUsername)) {
+			newUsername = username + String.format("%03d", num);
+			num++;
+		}
+		return newUsername;
+	}
+
+	public UserDTO save(User benutzerkonto) {
+		return convertToDTO(userDAO.save(benutzerkonto));
+	}
+
+	@Transactional
+	public void deleteBenutzerByBenutzername(String benutzername) {
+		Optional<User> benutzer = userDAO.findByUsername(benutzername);
+		if (benutzer.isPresent()) {
+			User user = benutzer.get();
+
+			if (user.getFsID() != null) {
+				fahrschuelerDAO.deleteById(user.getFsID());
+			} else if (user.getFlID() != null) {
+				fahrlehrerDAO.deleteById(user.getFlID());
+			}
+
+			userDAO.delete(user);
+		}
+	}
+
+	public boolean changePassword(String username, String oldPassword, String newPassword) {
+        User user = userDAO.findByUsernameAndPassword(username, oldPassword);
+        if (user != null) {
+            user.setPassword(newPassword);
+            userDAO.save(user);
+            return true;
+        }
+        return false;
+    }
+}

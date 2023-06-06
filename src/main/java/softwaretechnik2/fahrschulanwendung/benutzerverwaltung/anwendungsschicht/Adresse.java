@@ -3,6 +3,11 @@ package softwaretechnik2.fahrschulanwendung.benutzerverwaltung.anwendungsschicht
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 
+/**
+ * Die Klasse Adresse dient als Datentyp für die Adressverwaltung der Fahrschüler und Fahrlehrer
+ * @author seymen
+ *
+ */
 @Embeddable
 public class Adresse {
 	

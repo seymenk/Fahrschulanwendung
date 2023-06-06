@@ -22,6 +22,11 @@ import softwaretechnik2.fahrschulanwendung.benutzer.datenschicht.FahrlehrerDAO;
 import softwaretechnik2.fahrschulanwendung.benutzer.datenschicht.User;
 import softwaretechnik2.fahrschulanwendung.session.anwendungsschicht.SessionInterceptor;
 
+/**
+ * Controller zur Verwaltung der Fahrlehrer Klassen und HTTP Anfragen
+ * @author seymen
+ *
+ */
 @Controller
 public class FahrlehrerController {
 
@@ -34,6 +39,12 @@ public class FahrlehrerController {
 		this.sessionInterceptor = sessionInterceptor;
 	}
 
+	/**
+	 * Zeigt die Fahrlehrersuche, wenn der Benutzer ein Fahrlehrer ist, ansonsten leitet er zu "terminverwaltung-schueler" um.
+	 * @param session Aktuelle Benutzersitzung.
+	 * @param request HTTP-Anfrage.
+	 * @return Gibt den Namen der entsprechenden View zurück.
+	 */
 	@GetMapping("/suche-fahrlehrer")
 	public String searchFahrlehrer(HttpSession session, HttpServletRequest request) {
 		if (sessionInterceptor.hasUserRole(request, "fahrlehrer"))
@@ -42,6 +53,12 @@ public class FahrlehrerController {
 			return "redirect:/terminverwaltung-schueler";
 	}
 
+	/**
+	 * Durchsucht die Fahrlehrer-Datenbank anhand der übergebenen Vor- und Nachnamen.
+	 * @param vorname Fahrlehrer Vorname.
+	 * @param nachname Fahrlehrer Nachname.
+	 * @return Liste von FahrlehrerDTOs, die den Suchkriterien entsprechen.
+	 */
 	@GetMapping("/suche-api-fahrlehrer")
 	@ResponseBody
 	public List<FahrlehrerDTO> searchApi(
@@ -61,6 +78,11 @@ public class FahrlehrerController {
 	@Autowired
 	private ModelMapper modelMapper;
 
+	/**
+	 * Erstellt einen neuen Fahrlehrer und ein zugehöriges Benutzerkonto.
+	 * @param userCreationDTO Übermittelt die Benutzerinformationen.
+	 * @return ResponseEntity mit UserCreationResponseDTO, das Informationen über den erstellten Benutzer enthält.
+	 */
 	@PostMapping("/create-fahrlehrer")
 	public ResponseEntity<UserCreationResponseDTO> createFahrlehrer(@RequestBody UserCreationDTO userCreationDTO) {
 		Fahrlehrer fahrlehrer = modelMapper.map(userCreationDTO, Fahrlehrer.class);
@@ -80,6 +102,10 @@ public class FahrlehrerController {
 		return ResponseEntity.ok(responseDTO);
 	}
 
+	/**
+	 * Gibt alle Fahrlehrer in der Datenbank zurück.
+	 * @return Liste von FahrlehrerDTOs.
+	 */
 	@GetMapping("/get-alleFahrlehrer")
 	@ResponseBody
 	public List<FahrlehrerDTO> getAllFahrlehrer() {

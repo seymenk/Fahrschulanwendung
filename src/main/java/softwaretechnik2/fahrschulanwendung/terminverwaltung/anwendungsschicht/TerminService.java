@@ -10,6 +10,10 @@ import org.springframework.stereotype.Service;
 import softwaretechnik2.fahrschulanwendung.terminverwaltung.datenschicht.Termin;
 import softwaretechnik2.fahrschulanwendung.terminverwaltung.datenschicht.TerminDAO;
 
+/**
+ * Serviceklasse zur Verwaltung von Terminen.
+ * @author seymen
+ */
 @Service
 public class TerminService {
 
@@ -20,6 +24,11 @@ public class TerminService {
         this.terminRepository = terminRepository;
     }
 
+    /**
+     * Speichert eine Liste von Terminobjekten in der Datenbank.
+     * @param terminObjekte Liste von Terminobjekten, die gespeichert werden sollen.
+     * @param fahrlehrerId ID des Fahrlehrers, der die Termine festlegt.
+     */
     public void saveTerminSlots(List<Termin> terminObjekte, int fahrlehrerId) {
         List<Termin> terminSlots = terminObjekte.stream().map(termin -> {
             Termin newTermin = new Termin();
@@ -37,10 +46,20 @@ public class TerminService {
         terminRepository.saveAll(terminSlots);
     }
     
+    /**
+     * Löscht einen Termin anhand seiner ID.
+     * @param id Die ID des Termins, der gelöscht werden soll.
+     */
     public void deleteTermin(Long id) {
     	terminRepository.deleteById(id);
     }
     
+    /**
+     * Gibt eine Liste von verfügbaren Terminen für einen bestimmten Fahrlehrer und ein bestimmtes Datum zurück.
+     * @param fahrlehrerID ID des Fahrlehrers.
+     * @param datum Das Datum, für das die verfügbaren Termine abgerufen werden sollen.
+     * @return Liste von verfügbaren Terminen.
+     */
     public List<Termin> getAvailableTimeSlots(Long fahrlehrerID, LocalDate datum) {
         return terminRepository.findByFahrlehrerIDAndDatumAndGebuchtFalse(fahrlehrerID, datum);
     }

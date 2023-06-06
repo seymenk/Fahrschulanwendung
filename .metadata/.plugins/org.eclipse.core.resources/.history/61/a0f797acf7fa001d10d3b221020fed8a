@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Benutzer anlegen</title>
+    <link
+      rel="stylesheet"
+      href="css/benutzerverwaltung/benutzerverwaltung-anlegen.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css"
+    />
+    <script src="javascript/anwendungsschicht/navigation/navigation.js"></script>
+    <script src="javascript/anwendungsschicht/benutzerverwaltung/anwendungsschicht-benutzerverwaltung-anlegen.js"></script>
+    <script src="javascript/datenschicht/benutzerverwaltung/datenschicht-benutzerverwaltung-anlegen.js"></script>
+    <script src="javascript/praesentationsschicht/benutzerverwaltung/praesentationsschicht-benutzerverwaltung-anlegen.js"></script>
+  </head>
+  <body>
+    <div class="header">
+      <div class="left">
+        <img
+          src="path/to/your/profile-picture"
+          alt="Profilbild"
+          class="profile-picture"
+        />
+      </div>
+      <div class="middle">
+        <button class="nav-button">Startseite</button>
+        <button class="nav-button active">Benutzerverwaltung</button>
+        <button class="nav-button">Autoverwaltung</button>
+        <button class="nav-button">Terminverwaltung</button>
+      </div>
+      <div class="right">
+        <button class="nav-button">Konto</button>
+        <button class="nav-button">AGB</button>
+        <button class="nav-button">Impressum</button>
+      </div>
+    </div>
+    <div class="body">
+      <div class="ueberschrift">
+        <h1>Benutzer anlegen</h1>
+      </div>
+      <form id="user-form">
+        <div class="form-group">
+          <label for="vorname">Vorname:</label>
+          <input type="text" id="vorname" name="vorname" required />
+        </div>
+        <div class="form-group">
+          <label for="nachname">Nachname:</label>
+          <input type="text" id="nachname" name="nachname" required />
+        </div>
+        <div class="form-group">
+          <label for="geburtstag">Geburtsdatum:</label>
+          <input type="date" id="geburtstag" name="geburtstag" required />
+        </div>
+        <div class="form-group">
+          <label for="strasse">Straße:</label>
+          <input type="text" name="strasse" id="strasse" required />
+        </div>
+        <div class="form-group">
+          <label for="hausnummer">Hausnummer:</label>
+          <input type="text" name="hausnummer" id="hausnummer" required />
+        </div>
+        <div class="form-group">
+          <label for="ort">Ort:</label>
+          <input type="text" name="ort" id="ort" required />
+        </div>
+        <div class="form-group">
+          <label for="plz">PLZ:</label>
+          <input type="text" name="plz" id="plz" required />
+        </div>
+        <div class="icon-radio">
+          <label>
+            <input type="radio" name="role" value="Fahrschüler" />
+            <i class="fas fa-user-graduate"></i> Fahrschüler
+          </label>
+          <label>
+            <input type="radio" name="role" value="Fahrlehrer" />
+            <i class="fas fa-chalkboard-teacher"></i> Fahrlehrer
+          </label>
+        </div>
+        <button type="submit">Erstellen</button>
+      </form>
+    </div>
+  </body>
+</html>

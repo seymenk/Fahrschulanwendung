@@ -2,6 +2,11 @@ package softwaretechnik2.fahrschulanwendung.benutzerverwaltung.anwendungsschicht
 
 import java.util.Date;
 
+/**
+ * Die Klasse UserCreationDTO dient zur Unterstützung der UserCreationFactory Klasse.
+ * @author seymen
+ *
+ */
 public class UserCreationDTO {
 	private Long id;
 	private String vorname;

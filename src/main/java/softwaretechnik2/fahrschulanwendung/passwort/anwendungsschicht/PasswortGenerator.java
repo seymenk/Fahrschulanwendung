@@ -1,9 +1,5 @@
-/**
- * Passwort-Generator-Paket.
- */
 package softwaretechnik2.fahrschulanwendung.passwort.anwendungsschicht;
 
-// Import-Anweisungen
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -11,9 +7,9 @@ import java.util.stream.IntStream;
 /**
  * Definiert die PasswortGenerator-Klasse, die für die Erstellung von zufälligen
  * Passwörtern zuständig ist.
+ * @author seymen
  */
 public class PasswortGenerator {
-	// Konstante für die Passwortlänge
 	public int PASSWORD_LENGTH = 8;
 
 	/**
@@ -22,27 +18,22 @@ public class PasswortGenerator {
 	 * @return Ein zufällig generiertes Passwort als String.
 	 */
 	public String generateRandomPassword() {
-		// Initialisiere das Passwort-Array und die offenen Stellen
 		char[] passwordArray = new char[PASSWORD_LENGTH];
 		List<Integer> openPlaces = IntStream.range(0, PASSWORD_LENGTH).boxed().collect(Collectors.toList());
 
-		// Definiere die Regeln für die verschiedenen Zeichentypen
 		int[][] rules = { { 'a', 'z' }, { 'A', 'Z' }, { 48, 57 }, { 40, 47 } };
 
-		// Ersetze die leeren Array-Positionen mit den verschiedenen Zeichentypen
 		passwordArray = replaceEmptyArrayPositon(passwordArray, openPlaces, rules[0][0], rules[0][1]); // Kleinbuchstaben
 		passwordArray = replaceEmptyArrayPositon(passwordArray, openPlaces, rules[1][0], rules[1][1]); // Großbuchstaben
 		passwordArray = replaceEmptyArrayPositon(passwordArray, openPlaces, rules[2][0], rules[2][1]); // Zahlen
 		passwordArray = replaceEmptyArrayPositon(passwordArray, openPlaces, rules[3][0], rules[3][1]); // Sonderzeichen
 
-		// Fülle die restlichen Positionen nach den Regeln auf
 		for (int i = 1; i <= 4; i++) {
 			int ruleToUse = (int) generateChar(0, 3);
 			passwordArray = replaceEmptyArrayPositon(passwordArray, openPlaces, rules[ruleToUse][0],
 					rules[ruleToUse][1]);
 		}
 
-		// Konvertiere das Passwort-Array in einen String und gib es zurück
 		String password = new String(passwordArray);
 		return password;
 	}

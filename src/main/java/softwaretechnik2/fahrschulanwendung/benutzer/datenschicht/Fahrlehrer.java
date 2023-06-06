@@ -10,6 +10,11 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import softwaretechnik2.fahrschulanwendung.benutzerverwaltung.anwendungsschicht.Adresse;
 
+/**
+ * Die Fahrlehrerklasse zum erstellen von Fahrlehrer Instanzen. Mit Datenbankanbindung. Die Gegenklasse zu FahrlehrerDTO.
+ * @author seymen
+ *
+ */
 @Entity
 @Table(name = "Fahrlehrer")
 public class Fahrlehrer {

@@ -1,0 +1,42 @@
+package softwaretechnik2.fahrschulanwendung.autoverwaltung.anwendungsschicht;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import softwaretechnik2.fahrschulanwendung.autoverwaltung.datenschicht.Auto;
+import softwaretechnik2.fahrschulanwendung.autoverwaltung.datenschicht.AutoDAO;
+
+import java.util.List;
+import java.util.Optional;
+
+@Service
+public class AutoFassade {
+    private final AutoService autoService;
+    private final AutoDAO autoDAO;
+
+    @Autowired
+    public AutoFassade(AutoService autoService, AutoDAO autoDAO) {
+        this.autoService = autoService;
+        this.autoDAO = autoDAO;
+    }
+
+    public AutoDTO createAuto(AutoDTO autoDTO) {
+        return autoService.createAuto(autoDTO);
+    }
+
+    public AutoDTO updateAuto(AutoDTO autoDTO) {
+        return autoService.updateAuto(autoDTO);
+    }
+
+    public Optional<Auto> getCar(Long id) {
+        return autoDAO.findById(id);
+    }
+
+    public void deleteCar(Long id) {
+        autoService.deleteCar(id);
+    }
+
+    public List<Auto> getCars() {
+        return autoDAO.findAll();
+    }
+}

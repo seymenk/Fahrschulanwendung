@@ -1,0 +1,5 @@
+package softwaretechnik2.fahrschulanwendung.autoverwaltung.anwendungsschicht;
+
+public class AutoFassade {
+
+}

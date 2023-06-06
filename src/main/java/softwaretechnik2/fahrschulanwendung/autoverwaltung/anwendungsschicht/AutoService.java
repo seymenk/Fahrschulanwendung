@@ -10,12 +10,23 @@ import softwaretechnik2.fahrschulanwendung.autoverwaltung.datenschicht.AutoDAO;
 import softwaretechnik2.fahrschulanwendung.autoverwaltung.datenschicht.Automatik;
 import softwaretechnik2.fahrschulanwendung.autoverwaltung.datenschicht.Manuell;
 
+/**
+ * Dient als Serviceschicht, welche die Anforderungen der Präsentationsschicht behandelt und entsprechende
+ * Datenbankoperationen ausführt.
+ * @author seymen
+ *
+ */
 @Service
 public class AutoService {
 
 	@Autowired
 	private AutoDAO autoDAO;
 
+	/**
+	 * Die Methode konvertiert eine Auto Instanz zu einer AutoDTO Instanz
+	 * @param auto
+	 * @return eine AutoDTO Instanz
+	 */
 	public AutoDTO convertToAutoDTO(Auto auto) {
 		AutoDTO autoDTO;
 		if (auto instanceof Automatik) {
@@ -33,6 +44,11 @@ public class AutoService {
 		return autoDTO;
 	}
 
+	/**
+	 * Diese Methode konvertiert eine AutoDTO Instanz zu einer Auto Instanz
+	 * @param autoDTO
+	 * @return eine Auto Instanz
+	 */
 	public Auto convertToAuto(AutoDTO autoDTO) {
 		Auto auto;
 		if (autoDTO instanceof AutomatikDTO) {
@@ -50,12 +66,22 @@ public class AutoService {
 		return auto;
 	}
 
+	/**
+	 * Die Methode erstellt ein Auto
+	 * @param autoDTO
+	 * @return eine Auto Instanz
+	 */
 	public AutoDTO createAuto(AutoDTO autoDTO) {
 	    Auto auto = convertToAuto(autoDTO);
 	    Auto savedAuto = autoDAO.save(auto);
 	    return convertToAutoDTO(savedAuto);
 	}
 
+	/**
+	 * Die Methode ermöglicht das bearbeiten der Auto Attribute
+	 * @param autoDTO
+	 * @return eine Auto Instanz
+	 */
 	public AutoDTO updateAuto(AutoDTO autoDTO) {
 		Optional<Auto> existingAuto = autoDAO.findById(autoDTO.getId());
 		if (existingAuto.isPresent()) {
@@ -84,6 +110,10 @@ public class AutoService {
 		}
 	}
 
+	/**
+	 * Die Methode löscht das Auto.
+	 * @param id
+	 */
 	public void deleteCar(Long id) {
 		autoDAO.deleteById(id);
 	}

@@ -1,5 +1,10 @@
 package softwaretechnik2.fahrschulanwendung.benutzerverwaltung.anwendungsschicht;
 
+/**
+ * Die Klasse UserCreationResponseDTO dient zur Unterstützung der UserCreationFactory Klasse.
+ * @author seymen
+ *
+ */
 public class UserCreationResponseDTO {
 	private Long id;
 	private String vorname;

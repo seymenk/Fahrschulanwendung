@@ -7,6 +7,11 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
+/**
+ * Die User Klasse implementiert die Datenbankanbindung zur Benutzerkonto Klasse in der Datenbank.
+ * @author seymen
+ *
+ */
 @Entity
 @Table(name = "benutzerkonto")
 public class User {

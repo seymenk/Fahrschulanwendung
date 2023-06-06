@@ -2,6 +2,11 @@ package softwaretechnik2.fahrschulanwendung.benutzerverwaltung.anwendungsschicht
 
 import java.sql.Date;
 
+/**
+ * Die Fahrschueler Klasse als DTO Klasse.
+ * @author seymen
+ *
+ */
 public class FahrschuelerDTO {
 	
 	private Long id;

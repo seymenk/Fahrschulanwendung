@@ -1,9 +1,5 @@
-/**
- * Passwort-Paket.
- */
 package softwaretechnik2.fahrschulanwendung.passwort.anwendungsschicht;
 
-// Import-Anweisungen
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,11 +10,11 @@ import softwaretechnik2.fahrschulanwendung.benutzer.anwendungsschicht.UserServic
 /**
  * Definiert die PasswortController-Klasse als RestController, die für die
  * Verarbeitung von Passwortänderungsanfragen zuständig ist.
+ * @author seymen
  */
 @RestController
 public class PasswortController {
 
-	// Autowire die UserService-Komponente
 	@Autowired
 	private UserService userService;
 

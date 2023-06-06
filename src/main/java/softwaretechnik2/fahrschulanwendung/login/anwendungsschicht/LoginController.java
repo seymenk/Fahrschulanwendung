@@ -1,7 +1,3 @@
-/**
-
-Paket für die Login-Funktionalität.
-*/
 package softwaretechnik2.fahrschulanwendung.login.anwendungsschicht;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +16,7 @@ import softwaretechnik2.fahrschulanwendung.session.anwendungsschicht.SessionInte
 /**
  * 
  * Controller-Klasse für den Login.
+ * @author seymen
  */
 @Controller
 public class LoginController {
@@ -28,18 +25,29 @@ public class LoginController {
 
 	private final SessionInterceptor sessionInterceptor;
 
-	// Konstruktorinjektion
 	@Autowired
 	public LoginController(SessionInterceptor sessionInterceptor) {
 		this.sessionInterceptor = sessionInterceptor;
 	}
 
+	/**
+	 * Rendert die Login-Seite.
+	 * @param model das Modell, welches an die Ansicht übergeben wird.
+	 * @return die Name der Login-Seite.
+	 */
 	@GetMapping("/login")
 	public String login(Model model) {
 	    model.addAttribute("user", new UserDTO());
 	    return "login/index";
 	}
 
+	/**
+	 * Authentifiziert den Benutzer.
+	 * @param userDTO Benutzerdaten-Objekt.
+	 * @param model das Modell, welches an die Ansicht übergeben wird.
+	 * @param session aktuelle Session.
+	 * @return Umleitung zur entsprechenden Seite basierend auf Benutzerrolle.
+	 */
 	@PostMapping("/login")
 	public String authenticate(UserDTO userDTO, Model model, HttpSession session) {
 	    User authenticatedUser = userService.authenticate(userDTO.getUsername(), userDTO.getPassword());
@@ -63,6 +71,12 @@ public class LoginController {
 	    }
 	}
 
+	/**
+	 * Zeigt die Startseite an, wenn der Benutzer als Fahrlehrer authentifiziert ist.
+	 * @param session aktuelle Session.
+	 * @param request HTTP-Anfrage.
+	 * @return Umleitung zur entsprechenden Seite basierend auf Benutzerrolle.
+	 */
 	@GetMapping("/startseite")
 	public String startseite(HttpSession session, HttpServletRequest request) {
 		if (sessionInterceptor.hasUserRole(request, "fahrlehrer"))

@@ -5,6 +5,11 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 import jakarta.persistence.*;
 
+/**
+ * Die abstrakte Auto Klasse mit Datenbankanbindung. Der Gegensatz zur DTO Klasse.
+ * @author seymen
+ *
+ */
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "getriebe", discriminatorType = DiscriminatorType.STRING)

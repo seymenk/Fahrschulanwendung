@@ -4,6 +4,11 @@ import java.sql.Date;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Die TerminDTO Klasse dient zur Implementierung von Termin Instanzen.
+ * @author seymen
+ *
+ */
 public class TerminDTO {
 	private int id;
 	private int fahrschuelerID;

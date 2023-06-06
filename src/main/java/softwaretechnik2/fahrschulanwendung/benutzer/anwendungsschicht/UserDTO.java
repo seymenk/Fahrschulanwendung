@@ -1,5 +1,10 @@
 package softwaretechnik2.fahrschulanwendung.benutzer.anwendungsschicht;
 
+/**
+ * Die Benutzerkonto Klasse als DTO Klasse.
+ * @author seymen
+ *
+ */
 public class UserDTO {
 
 	private Long id;

@@ -1,0 +1,63 @@
+package softwaretechnik2.fahrschulanwendung.benutzer.datenschicht;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import java.util.List;
+
+@Component
+public class BenutzerverwaltungFassade {
+
+    @Autowired
+    private FahrlehrerDAO fahrlehrerDAO;
+
+    @Autowired
+    private FahrschuelerDAO fahrschuelerDAO;
+
+    @Autowired
+    private UserDAO userDAO;
+
+    public Fahrlehrer findFahrlehrerById(Long id) {
+        return fahrlehrerDAO.findById(id).orElse(null);
+    }
+
+    public Fahrschueler findFahrschuelerById(Long id) {
+        return fahrschuelerDAO.findById(id).orElse(null);
+    }
+
+    public User findUserById(Long id) {
+        return userDAO.findById(id).orElse(null);
+    }
+
+    public Fahrlehrer saveFahrlehrer(Fahrlehrer fahrlehrer) {
+        return fahrlehrerDAO.save(fahrlehrer);
+    }
+
+    public Fahrschueler saveFahrschueler(Fahrschueler fahrschueler) {
+        return fahrschuelerDAO.save(fahrschueler);
+    }
+
+    public User saveUser(User user) {
+        return userDAO.save(user);
+    }
+
+    public List<Fahrlehrer> findFahrlehrerBySearchTerm(String vorname, String nachname) {
+        return fahrlehrerDAO.findBySearchTerm(vorname, nachname);
+    }
+
+    public List<Fahrschueler> findFahrschuelerBySearchTerm(String vorname, String nachname) {
+        return fahrschuelerDAO.findBySearchTerm(vorname, nachname);
+    }
+
+    public void deleteFahrlehrer(Long id) {
+        fahrlehrerDAO.deleteById(id);
+    }
+
+    public void deleteFahrschueler(Long id) {
+        fahrschuelerDAO.deleteById(id);
+    }
+
+    public void deleteUser(Long id) {
+        userDAO.deleteById(id);
+    }
+}

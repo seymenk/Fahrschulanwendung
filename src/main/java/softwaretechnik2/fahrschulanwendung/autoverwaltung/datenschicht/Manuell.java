@@ -4,6 +4,11 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 
 import jakarta.persistence.*;
 
+/**
+ * Erbt von der Klasse Auto. Implementiert die Manuell Klasse mit Datenbankanbindung. Die Gegenklasse zu ManuellDTO.
+ * @author seymen
+ *
+ */
 @Entity
 @DiscriminatorValue("Manuell")
 @JsonTypeName("softwaretechnik2.fahrschule.swt.autoverwaltung.Manuell")

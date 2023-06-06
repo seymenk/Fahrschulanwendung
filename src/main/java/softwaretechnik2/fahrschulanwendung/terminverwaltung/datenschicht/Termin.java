@@ -12,6 +12,11 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
+/**
+ * Die Termin Klasse zur Implementierung von Terminen mit Datenbankanbindung. Die Gegenklasse zu TerminDTO.
+ * @author seymen
+ *
+ */
 @Entity
 @Table(name = "Termin")
 public class Termin {

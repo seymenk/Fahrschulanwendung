@@ -2,6 +2,11 @@ package softwaretechnik2.fahrschulanwendung.autoverwaltung.anwendungsschicht;
 
 import com.fasterxml.jackson.annotation.JsonTypeName;
 
+/**
+ * Eine DTO Klasse von Automatik, welche von AutoDTO erbt.
+ * @author seymen
+ *
+ */
 @JsonTypeName("softwaretechnik2.fahrschule.swt.autoverwaltung.AutomatikDTO")
 public class AutomatikDTO extends AutoDTO{
 	public AutomatikDTO() {

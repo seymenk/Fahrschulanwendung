@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+    <fullyQualifiedTypeName name="softwaretechnik2.fahrschulanwendung.autoverwaltung.datenschicht.AutoDAO"/>
+    <fullyQualifiedTypeName name="softwaretechnik2.fahrschulanwendung.autoverwaltung.datenschicht.Auto"/>
+    <fullyQualifiedTypeName name="softwaretechnik2.fahrschulanwendung.benutzer.datenschicht.BenutzerverwaltungFassade"/>
+    <fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Autowired"/>
+    <fullyQualifiedTypeName name="softwaretechnik2.fahrschulanwendung.benutzer.datenschicht.FahrschuelerDAO"/>
+    <fullyQualifiedTypeName name="org.modelmapper.ModelMapper"/>
+    <fullyQualifiedTypeName name="softwaretechnik2.fahrschulanwendung.benutzer.anwendungsschicht.UserDTO"/>
+    <fullyQualifiedTypeName name="softwaretechnik2.fahrschulanwendung.benutzer.datenschicht.Fahrschueler"/>
+    <fullyQualifiedTypeName name="org.springframework.stereotype.Service"/>
+    <fullyQualifiedTypeName name="softwaretechnik2.fahrschulanwendung.benutzer.datenschicht.Fahrlehrer"/>
+    <fullyQualifiedTypeName name="softwaretechnik2.fahrschulanwendung.benutzer.datenschicht.FahrlehrerDAO"/>
+    <fullyQualifiedTypeName name="softwaretechnik2.fahrschulanwendung.benutzer.anwendungsschicht.UserFactory"/>
+    <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.RequestBody"/>
+    <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.RequestParam"/>
+    <fullyQualifiedTypeName name="org.springframework.http.ResponseEntity"/>
+    <fullyQualifiedTypeName name="softwaretechnik2.fahrschulanwendung.benutzerverwaltung.anwendungsschicht.FahrschuelerFactory"/>
+    <fullyQualifiedTypeName name="softwaretechnik2.fahrschulanwendung.benutzerverwaltung.anwendungsschicht.FahrlehrerFactory"/>
+    <fullyQualifiedTypeName name="softwaretechnik2.fahrschulanwendung.benutzer.datenschicht.User"/>
+    <fullyQualifiedTypeName name="org.springframework.stereotype.Repository"/>
+    <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.PostMapping"/>
+</qualifiedTypeNameHistroy>

@@ -22,6 +22,11 @@ import softwaretechnik2.fahrschulanwendung.benutzer.datenschicht.FahrschuelerDAO
 import softwaretechnik2.fahrschulanwendung.benutzer.datenschicht.User;
 import softwaretechnik2.fahrschulanwendung.session.anwendungsschicht.SessionInterceptor;
 
+/**
+ * Controller zur Verwaltung der Fahrschueler Klassen und HTTP Anfragen
+ * @author seymen
+ *
+ */
 @Controller
 public class FahrschuelerController {
 	private final FahrschuelerDAO fahrschuelerDAO;
@@ -33,6 +38,12 @@ public class FahrschuelerController {
 		this.sessionInterceptor = sessionInterceptor;
 	}
 	
+	/**
+	 * Zeigt die Fahrschülersuche, wenn der Benutzer ein Fahrlehrer ist, ansonsten leitet er zu "terminverwaltung-schueler" um.
+	 * @param session Aktuelle Benutzersitzung.
+	 * @param request HTTP-Anfrage.
+	 * @return Gibt den Namen der entsprechenden View zurück.
+	 */
 	@GetMapping("/suche-fahrschueler")
 	public String searchFahrschueler(HttpSession session, HttpServletRequest request) {
 		if (sessionInterceptor.hasUserRole(request, "fahrlehrer"))
@@ -44,6 +55,12 @@ public class FahrschuelerController {
 	@Autowired
 	private ModelMapper modelMapper;
 
+	/**
+	 * Durchsucht die Fahrschüler-Datenbank anhand der übergebenen Vor- und Nachnamen.
+	 * @param vorname Fahrschüler Vorname.
+	 * @param nachname Fahrschüler Nachname.
+	 * @return Liste von FahrschülerDTOs, die den Suchkriterien entsprechen.
+	 */
 	@GetMapping("/suche-api-fahrschueler")
 	@ResponseBody
 	public List<FahrschuelerDTO> searchApi(
@@ -60,6 +77,11 @@ public class FahrschuelerController {
 	@Autowired
 	private UserService benutzerkontoService;
 
+	/**
+	 * Erstellt einen neuen Fahrschüler und ein zugehöriges Benutzerkonto.
+	 * @param userCreationDTO Übermittelt die Benutzerinformationen.
+	 * @return ResponseEntity mit UserCreationResponseDTO, das Informationen über den erstellten Benutzer enthält.
+	 */
 	@PostMapping("/create-fahrschueler")
 	public ResponseEntity<UserCreationResponseDTO> createFahrschueler(@RequestBody UserCreationDTO userCreationDTO) {
 	    Fahrschueler fahrschueler = modelMapper.map(userCreationDTO, Fahrschueler.class);

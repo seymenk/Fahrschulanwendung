@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="css/autoverwaltung/autoverwaltung.css" />
     <script src="javascript/anwendungsschicht/navigation/navigation.js"></script>
     <script src="javascript/anwendungsschicht/autoverwaltung/anwendungsschicht-autoverwaltung.js"></script>
+    <script src="javascript/praesentationsschicht/messages/messages.js"></script>
   </head>
   <body>
     <div class="header">
@@ -18,23 +19,23 @@
         />
       </div>
       <div class="middle">
-        <button class="nav-button">Startseite</button>
-        <button class="nav-button">Benutzerverwaltung</button>
-        <button class="nav-button active">Autoverwaltung</button>
-        <button class="nav-button">Terminverwaltung</button>
+        <button class="nav-button" id="startseiteNavBarButton">Startseite</button>
+        <button class="nav-button" id="benutzerverwaltungNavBarButton">Benutzerverwaltung</button>
+        <button class="nav-button active" id="autoverwaltungNavBarButton">Autoverwaltung</button>
+        <button class="nav-button" id="terminverwaltungNavBarButton">Terminverwaltung</button>
       </div>
       <div class="right">
-        <button class="nav-button">Konto</button>
-        <button class="nav-button">AGB</button>
-        <button class="nav-button">Impressum</button>
+        <button class="nav-button" id="kontoNavBarButton">Konto</button>
+        <button class="nav-button" id="agbNavBarButton">AGB</button>
+        <button class="nav-button" id="impressumNavBarButton">Impressum</button>
       </div>
     </div>
     <div class="body">
       <div class="optionen">
-        <button>Autos anzeigen</button>
-        <button>Auto hinzufügen</button>
-        <button>Auto ändern</button>
-        <button>Auto löschen</button>
+        <button id="autosAnzeigenButton">Autos anzeigen</button>
+        <button id="autosHinzufuegenButton">Auto hinzufügen</button>
+        <button id="autosAendernButton">Auto ändern</button>
+        <button id="autosLoeschenButton">Auto löschen</button>
       </div>
     </div>
   </body>

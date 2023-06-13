@@ -1,80 +1,75 @@
 <!DOCTYPE html>
 <html lang="de">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Auto hinzufügen</title>
-    <link
-      rel="stylesheet"
-      href="css/autoverwaltung/autoverwaltung-hinzufuegen.css"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css"
-    />
-    <script src="javascript/anwendungsschicht/navigation/navigation.js"></script>
-    <script src="javascript/anwendungsschicht/autoverwaltung/anwendungsschicht-autoverwaltung-hinzufuegen.js"></script>
-    <script src="javascript/datenschicht/autoverwaltung/datenschicht-autoverwaltung-hinzufuegen.js"></script>
-    <script src="javascript/praesentationsschicht/autoverwaltung/praesentationsschicht-autoverwaltung-hinzufuegen.js"></script>
-  </head>
-  <body>
-    <div class="header">
-      <div class="left">
-        <img
-          src="path/to/your/profile-picture"
-          alt="Profilbild"
-          class="profile-picture"
-        />
-      </div>
-      <div class="middle">
-        <button class="nav-button">Startseite</button>
-        <button class="nav-button">Benutzerverwaltung</button>
-        <button class="nav-button active">Autoverwaltung</button>
-        <button class="nav-button">Terminverwaltung</button>
-      </div>
-      <div class="right">
-        <button class="nav-button">Konto</button>
-        <button class="nav-button">AGB</button>
-        <button class="nav-button">Impressum</button>
-      </div>
-    </div>
-    <div class="body">
-      <div class="ueberschrift">
-        <h1>Auto hinzufügen</h1>
-      </div>
-      <form id="auto-form">
-        <div class="form-group">
-          <label for="marke">Marke:</label>
-          <input type="text" id="marke" name="marke" required />
-        </div>
-        <div class="form-group">
-          <label for="modell">Modell:</label>
-          <input type="text" id="modell" name="modell" required />
-        </div>
-        <div class="form-group">
-          <label for="baujahr">Baujahr:</label>
-          <input type="number" id="baujahr" name="baujahr" required />
-        </div>
-        <div class="form-group">
-          <label for="farbe">Farbe:</label>
-          <input type="text" id="farbe" name="farbe" required />
-        </div>
-        <div class="form-group">
-          <label for="preis">Preis:</label>
-          <input type="number" id="preis" name="preis" required />
-        </div>
-        <div class="icon-radio">
-          <label>
-            <input type="radio" name="role" value="Manuell" />
-            <i class="fas fa-cogs"></i> Manuell
-          </label>
-          <label>
-            <input type="radio" name="role" value="Automatik" />
-            <i class="fas fa-car-side"></i> Automatik
-          </label>
-        </div>
-        <button type="submit">Erstellen</button>
-      </form>
-    </div>
-  </body>
+
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Auto hinzufügen</title>
+	<link rel="stylesheet" href="css/autoverwaltung/autoverwaltung-hinzufuegen.css" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css" />
+	<script src="javascript/anwendungsschicht/navigation/navigation.js"></script>
+	<script src="javascript/anwendungsschicht/autoverwaltung/anwendungsschicht-autoverwaltung-hinzufuegen.js"></script>
+	<script src="javascript/datenschicht/autoverwaltung/datenschicht-autoverwaltung-hinzufuegen.js"></script>
+	<script
+		src="javascript/praesentationsschicht/autoverwaltung/praesentationsschicht-autoverwaltung-hinzufuegen.js"></script>
+	<script src="javascript/praesentationsschicht/messages/messages.js"></script>
+</head>
+
+<body>
+	<div class="header">
+		<div class="left">
+			<img src="path/to/your/profile-picture" alt="Profilbild" class="profile-picture" />
+		</div>
+		<div class="middle">
+			<button class="nav-button" id="startseiteNavBarButton">Startseite</button>
+			<button class="nav-button" id="benutzerverwaltungNavBarButton">Benutzerverwaltung</button>
+			<button class="nav-button active" id="autoverwaltungNavBarButton">Autoverwaltung</button>
+			<button class="nav-button" id="terminverwaltungNavBarButton">Terminverwaltung</button>
+		</div>
+		<div class="right">
+			<button class="nav-button" id="kontoNavBarButton">Konto</button>
+			<button class="nav-button" id="agbNavBarButton">AGB</button>
+			<button class="nav-button" id="impressumNavBarButton">Impressum</button>
+		</div>
+	</div>
+	<div class="body">
+		<div class="ueberschrift">
+			<h1 id="autosHinzufuegenButton">Auto hinzufügen</h1>
+		</div>
+		<form id="auto-form">
+			<div class="form-group">
+				<label for="marke" id="markeLabel">Marke:</label>
+				<input type="text" id="marke" name="marke" required />
+			</div>
+			<div class="form-group">
+				<label for="modell" id="modellLabel">Modell:</label>
+				<input type="text" id="modell" name="modell" required />
+			</div>
+			<div class="form-group">
+				<label for="baujahr" id="baujahrLabel">Baujahr:</label>
+				<input type="number" id="baujahr" name="baujahr" required />
+			</div>
+			<div class="form-group">
+				<label for="farbe" id="farbeLabel">Farbe:</label>
+				<input type="text" id="farbe" name="farbe" required />
+			</div>
+			<div class="form-group">
+				<label for="preis" id="preisLabel">Preis:</label>
+				<input type="number" id="preis" name="preis" required />
+			</div>
+			<div class="icon-radio">
+				<label>
+					<input type="radio" name="role" value="Manuell" />
+					<i class="fas fa-cogs"></i> <p id="manuellLabel">Manuell</p>
+				</label>
+				<label>
+					<input type="radio" name="role" value="Automatik" />
+					<i class="fas fa-car-side"></i> <p id="automatikLabel">Manuell</p>
+				</label>
+			</div>
+			<button type="submit" id="erstellenButton">Erstellen</button>
+		</form>
+	</div>
+</body>
+
 </html>

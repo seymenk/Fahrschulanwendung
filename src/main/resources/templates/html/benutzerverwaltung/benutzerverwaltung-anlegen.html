@@ -16,6 +16,7 @@
     <script src="javascript/anwendungsschicht/benutzerverwaltung/anwendungsschicht-benutzerverwaltung-anlegen.js"></script>
     <script src="javascript/datenschicht/benutzerverwaltung/datenschicht-benutzerverwaltung-anlegen.js"></script>
     <script src="javascript/praesentationsschicht/benutzerverwaltung/praesentationsschicht-benutzerverwaltung-anlegen.js"></script>
+  	<script src="javascript/praesentationsschicht/messages/messages.js"></script>
   </head>
   <body>
     <div class="header">
@@ -27,61 +28,61 @@
         />
       </div>
       <div class="middle">
-        <button class="nav-button">Startseite</button>
-        <button class="nav-button active">Benutzerverwaltung</button>
-        <button class="nav-button">Autoverwaltung</button>
-        <button class="nav-button">Terminverwaltung</button>
-      </div>
-      <div class="right">
-        <button class="nav-button">Konto</button>
-        <button class="nav-button">AGB</button>
-        <button class="nav-button">Impressum</button>
-      </div>
+			<button class="nav-button" id="startseiteNavBarButton">Startseite</button>
+			<button class="nav-button active" id="benutzerverwaltungNavBarButton">Benutzerverwaltung</button>
+			<button class="nav-button" id="autoverwaltungNavBarButton">Autoverwaltung</button>
+			<button class="nav-button" id="terminverwaltungNavBarButton">Terminverwaltung</button>
+		</div>
+		<div class="right">
+			<button class="nav-button" id="kontoNavBarButton">Konto</button>
+			<button class="nav-button" id="agbNavBarButton">AGB</button>
+			<button class="nav-button" id="impressumNavBarButton">Impressum</button>
+		</div>
     </div>
     <div class="body">
       <div class="ueberschrift">
-        <h1>Benutzer anlegen</h1>
+        <h1 id="benutzerAnlegenUeberschrift">Benutzer anlegen</h1>
       </div>
       <form id="user-form">
         <div class="form-group">
-          <label for="vorname">Vorname:</label>
+          <label for="vorname" id="vornameLabel">Vorname:</label>
           <input type="text" id="vorname" name="vorname" required />
         </div>
         <div class="form-group">
-          <label for="nachname">Nachname:</label>
+          <label for="nachname" id="nachnameLabel">Nachname:</label>
           <input type="text" id="nachname" name="nachname" required />
         </div>
         <div class="form-group">
-          <label for="geburtstag">Geburtsdatum:</label>
+          <label for="geburtstag" id="geburtsdatumLabel">Geburtsdatum:</label>
           <input type="date" id="geburtstag" name="geburtstag" required />
         </div>
         <div class="form-group">
-          <label for="strasse">Straße:</label>
+          <label for="strasse" id="strasseLabel">Straße:</label>
           <input type="text" name="strasse" id="strasse" required />
         </div>
         <div class="form-group">
-          <label for="hausnummer">Hausnummer:</label>
+          <label for="hausnummer" id="hausnummerLabel">Hausnummer:</label>
           <input type="text" name="hausnummer" id="hausnummer" required />
         </div>
         <div class="form-group">
-          <label for="ort">Ort:</label>
+          <label for="ort" id="ortLabel">Ort:</label>
           <input type="text" name="ort" id="ort" required />
         </div>
         <div class="form-group">
-          <label for="plz">PLZ:</label>
+          <label for="plz" id="plzLabel">PLZ:</label>
           <input type="text" name="plz" id="plz" required />
         </div>
         <div class="icon-radio">
           <label>
             <input type="radio" name="role" value="Fahrschüler" />
-            <i class="fas fa-user-graduate"></i> Fahrschüler
+            <i class="fas fa-user-graduate"></i> <p id="fahrschuelerLabel">Fahrschüler</p>
           </label>
           <label>
             <input type="radio" name="role" value="Fahrlehrer" />
-            <i class="fas fa-chalkboard-teacher"></i> Fahrlehrer
+            <i class="fas fa-chalkboard-teacher"></i> <p id="fahrlehrerLabel">Fahrlehrer</p>
           </label>
         </div>
-        <button type="submit">Erstellen</button>
+        <button type="submit" id="erstellenButton">Erstellen</button>
       </form>
     </div>
   </body>

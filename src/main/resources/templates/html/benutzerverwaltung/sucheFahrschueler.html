@@ -12,6 +12,7 @@
     <script src="javascript/anwendungsschicht/benutzerverwaltung/anwendungsschicht-sucheFahrschueler.js"></script>
     <script src="javascript/datenschicht/benutzerverwaltung/datenschicht-sucheFahschueler.js"></script>
     <script src="javascript/praesentationsschicht/benutzerverwaltung/praesentationsschicht-sucheFahrschueler.js"></script>
+    <script src="javascript/praesentationsschicht/messages/messages.js"></script>
   </head>
   <body>
     <div class="header">
@@ -23,28 +24,28 @@
         />
       </div>
       <div class="middle">
-        <button class="nav-button">Startseite</button>
-        <button class="nav-button active">Benutzerverwaltung</button>
-        <button class="nav-button">Autoverwaltung</button>
-        <button class="nav-button">Terminverwaltung</button>
-      </div>
-      <div class="right">
-        <button class="nav-button">Konto</button>
-        <button class="nav-button">AGB</button>
-        <button class="nav-button">Impressum</button>
-      </div>
+			<button class="nav-button" id="startseiteNavBarButton">Startseite</button>
+			<button class="nav-button active" id="benutzerverwaltungNavBarButton">Benutzerverwaltung</button>
+			<button class="nav-button" id="autoverwaltungNavBarButton">Autoverwaltung</button>
+			<button class="nav-button" id="terminverwaltungNavBarButton">Terminverwaltung</button>
+		</div>
+		<div class="right">
+			<button class="nav-button" id="kontoNavBarButton">Konto</button>
+			<button class="nav-button" id="agbNavBarButton">AGB</button>
+			<button class="nav-button" id="impressumNavBarButton">Impressum</button>
+		</div>
     </div>
     <div class="body">
-      <h1>Fahrschüler suchen</h1>
+      <h1 id="fahrschuelerSuchenUeberschrift">Fahrschüler suchen</h1>
 
       <div class="suche">
-        <label>Name</label>
+        <label id="nameLabel">Name</label>
         <input type="text" id="search-input" placeholder="Name" />
       </div>
-      <p class="gefundene-schueler">Gefundene Schüler</p>
+      <p class="gefundene-schueler" id="gefundeneSchueler">Gefundene Schüler</p>
       <div id="liste-schueler" class="liste-schueler"></div>
       <p id="results"></p>
-      <button type="submit">Übersicht</button>
+      <button type="submit" id="uebersichtButton">Übersicht</button>
     </div>
   </body>
 </html>

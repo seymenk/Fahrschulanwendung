@@ -11,6 +11,7 @@
     <script src="javascript/anwendungsschicht/navigation/navigation.js"></script>
     <script src="javascript/anwendungsschicht/benutzerverwaltung/anwendungsschicht-benutzerverwaltung-loeschen.js"></script>
     <script src="javascript/datenschicht/benutzerverwaltung/datenschicht-benutzerverwaltung-loeschen.js"></script>
+ 	<script src="javascript/praesentationsschicht/messages/messages.js"></script> 
   </head>
   <body>
     <div class="header">
@@ -22,27 +23,27 @@
         />
       </div>
       <div class="middle">
-        <button class="nav-button">Startseite</button>
-        <button class="nav-button active">Benutzerverwaltung</button>
-        <button class="nav-button">Autoverwaltung</button>
-        <button class="nav-button">Terminverwaltung</button>
-      </div>
-      <div class="right">
-        <button class="nav-button">Konto</button>
-        <button class="nav-button">AGB</button>
-        <button class="nav-button">Impressum</button>
-      </div>
+			<button class="nav-button" id="startseiteNavBarButton">Startseite</button>
+			<button class="nav-button active" id="benutzerverwaltungNavBarButton">Benutzerverwaltung</button>
+			<button class="nav-button" id="autoverwaltungNavBarButton">Autoverwaltung</button>
+			<button class="nav-button" id="terminverwaltungNavBarButton">Terminverwaltung</button>
+		</div>
+		<div class="right">
+			<button class="nav-button" id="kontoNavBarButton">Konto</button>
+			<button class="nav-button" id="agbNavBarButton">AGB</button>
+			<button class="nav-button" id="impressumNavBarButton">Impressum</button>
+		</div>
     </div>
     <div class="body">
       <div class="ueberschrift">
-        <h1>Benutzer löschen</h1>
+        <h1 id="benutzerLoeschenUeberschrift">Benutzer löschen</h1>
       </div>
       <form id="user-form">
         <div class="form-group">
-          <label for="vorname">Benutzername:</label>
+          <label for="vorname" id="benutzernameLabel">Benutzername:</label>
           <input type="text" id="benutzername" name="benutzername" required />
         </div>
-        <button type="submit">Löschen</button>
+        <button type="submit" id="loeschenButton">Löschen</button>
       </form>
     </div>
   </body>

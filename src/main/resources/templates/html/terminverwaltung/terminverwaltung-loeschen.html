@@ -6,6 +6,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<title>Termin löschen</title>
 	<link rel="stylesheet" href="css/terminverwaltung/terminverwaltung-loeschen.css" />
+	<script src="javascript/praesentationsschicht/messages/messages.js"></script>
 </head>
 
 <body>
@@ -14,27 +15,27 @@
 			<img src="path/to/your/profile-picture" alt="Profilbild" class="profile-picture" />
 		</div>
 		<div class="middle">
-			<button class="nav-button">Startseite</button>
-			<button class="nav-button">Benutzerverwaltung</button>
-			<button class="nav-button">Autoverwaltung</button>
-			<button class="nav-button active">Terminverwaltung</button>
+			<button class="nav-button" id="startseiteNavBarButton">Startseite</button>
+			<button class="nav-button" id="benutzerverwaltungNavBarButton">Benutzerverwaltung</button>
+			<button class="nav-button" id="autoverwaltungNavBarButton">Autoverwaltung</button>
+			<button class="nav-button active" id="terminverwaltungNavBarButton">Terminverwaltung</button>
 		</div>
 		<div class="right">
-			<button class="nav-button">Konto</button>
-			<button class="nav-button">AGB</button>
-			<button class="nav-button">Impressum</button>
+			<button class="nav-button" id="kontoNavBarButton">Konto</button>
+			<button class="nav-button" id="agbNavBarButton">AGB</button>
+			<button class="nav-button" id="impressumNavBarButton">Impressum</button>
 		</div>
 	</div>
 	<div class="body">
 		<div class="ueberschrift">
-			<h1>Termin löschen</h1>
+			<h1 id="terminLoeschenButton">Termin löschen</h1>
 		</div>
 		<form id="termin-form">
 			<div class="form-group">
-				<label for="id">Termin ID:</label>
+				<label for="id" id="terminID">Termin ID:</label>
 				<input type="text" id="id" name="id" required />
 			</div>
-			<button type="submit" onclick="onDeleteTermin(event)">Löschen</button>
+			<button type="submit" onclick="onDeleteTermin(event)" id="loeschenButton">Löschen</button>
 		</form>
 	</div>
 	<script src="javascript/anwendungsschicht/navigation/navigation.js"></script>

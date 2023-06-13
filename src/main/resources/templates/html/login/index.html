@@ -8,6 +8,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="css/login/login.css" />
+    <script src="javascript/praesentationsschicht/messages/messages.js"></script>
     <title>Login Bereich</title>
     <style>
       .container {
@@ -86,12 +87,12 @@
             th:text="${error}"
             class="error-message anmelden-text"
           ></p>
-          <p th:if="${error == null}" class="anmelden-text">Anmelden</p>
+          <p th:if="${error == null}" class="anmelden-text" id="anmelden">Anmelden</p>
           <div class="input-fields">
             <input type="text" placeholder="Benutzername" name="username" />
             <input type="password" placeholder="Passwort" name="password" />
           </div>
-          <button type="submit">Anmelden</button>
+          <button type="submit" id="anmeldenButton">Anmelden</button>
         </form>
       </div>
     </div>

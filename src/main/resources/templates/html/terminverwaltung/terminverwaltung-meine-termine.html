@@ -8,6 +8,7 @@
       rel="stylesheet"
       href="css/terminverwaltung/terminverwaltung-meine-termine.css"
     />
+    <script src="javascript/praesentationsschicht/messages/messages.js"></script>
   </head>
   <body>
     <div class="header">
@@ -19,19 +20,19 @@
         />
       </div>
       <div class="middle">
-        <button class="nav-button">Startseite</button>
-        <button class="nav-button">Benutzerverwaltung</button>
-        <button class="nav-button">Autoverwaltung</button>
-        <button class="nav-button active">Terminverwaltung</button>
-      </div>
-      <div class="right">
-        <button class="nav-button">Konto</button>
-        <button class="nav-button">AGB</button>
-        <button class="nav-button">Impressum</button>
-      </div>
+			<button class="nav-button" id="startseiteNavBarButton">Startseite</button>
+			<button class="nav-button" id="benutzerverwaltungNavBarButton">Benutzerverwaltung</button>
+			<button class="nav-button" id="autoverwaltungNavBarButton">Autoverwaltung</button>
+			<button class="nav-button active" id="terminverwaltungNavBarButton">Terminverwaltung</button>
+		</div>
+		<div class="right">
+			<button class="nav-button" id="kontoNavBarButton">Konto</button>
+			<button class="nav-button" id="agbNavBarButton">AGB</button>
+			<button class="nav-button" id="impressumNavBarButton">Impressum</button>
+		</div>
     </div>
     <div class="body">
-      <h1>Meine Termine</h1>
+      <h1 id="meineTermineButton">Meine Termine</h1>
       <div id="liste-meine-termine" class="liste-meine-termine"></div>
       <p id="results"></p>
     </div>

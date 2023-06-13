@@ -12,6 +12,7 @@
     <script src="javascript/datenschicht/autoverwaltung/datenschicht-autoverwaltung-loeschen.js"></script>
     <script src="javascript/anwendungsschicht/autoverwaltung/anwendungsschicht-autoverwaltung-loeschen.js"></script>
     <script src="javascript/praesentationsschicht/autoverwaltung/praesentationsschicht-autoverwaltung-loeschen.js"></script>
+  	<script src="javascript/praesentationsschicht/messages/messages.js"></script>
   </head>
   <body>
     <div class="header">
@@ -22,28 +23,28 @@
           class="profile-picture"
         />
       </div>
-      <div class="middle">
-        <button class="nav-button">Startseite</button>
-        <button class="nav-button">Benutzerverwaltung</button>
-        <button class="nav-button active">Autoverwaltung</button>
-        <button class="nav-button">Terminverwaltung</button>
-      </div>
-      <div class="right">
-        <button class="nav-button">Konto</button>
-        <button class="nav-button">AGB</button>
-        <button class="nav-button">Impressum</button>
-      </div>
+		<div class="middle">
+			<button class="nav-button" id="startseiteNavBarButton">Startseite</button>
+			<button class="nav-button" id="benutzerverwaltungNavBarButton">Benutzerverwaltung</button>
+			<button class="nav-button active" id="autoverwaltungNavBarButton">Autoverwaltung</button>
+			<button class="nav-button" id="terminverwaltungNavBarButton">Terminverwaltung</button>
+		</div>
+		<div class="right">
+			<button class="nav-button" id="kontoNavBarButton">Konto</button>
+			<button class="nav-button" id="agbNavBarButton">AGB</button>
+			<button class="nav-button" id="impressumNavBarButton">Impressum</button>
+		</div>
     </div>
     <div class="body">
       <div class="ueberschrift">
-        <h1>Auto löschen</h1>
+        <h1 id="autosLoeschenButton">Auto löschen</h1>
       </div>
       <form id="auto-form">
         <div class="form-group">
-          <label for="id">Auto ID:</label>
+          <label for="id" id="autoIDLabel">Auto ID:</label>
           <input type="text" id="id" name="id" required />
         </div>
-        <button type="button" onclick="deleteCar()">Löschen</button>
+        <button type="button" onclick="deleteCar()" id="loeschenButton">Löschen</button>
       </form>
     </div>
   </body>

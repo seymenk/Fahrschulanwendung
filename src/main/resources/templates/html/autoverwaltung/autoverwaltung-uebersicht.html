@@ -12,6 +12,7 @@
     <script src="javascript/datenschicht/autoverwaltung/datenschicht-autoverwaltung-uebersicht.js"></script>
     <script src="javascript/anwendungsschicht/autoverwaltung/anwendungsschicht-autoverwaltung-uebersicht.js"></script>
     <script src="javascript/praesentationsschicht/autoverwaltung/praesentationsschicht-autoverwaltung-uebersicht.js"></script>
+  	<script src="javascript/praesentationsschicht/messages/messages.js"></script>
   </head>
   <body>
     <div class="header">
@@ -22,21 +23,21 @@
           class="profile-picture"
         />
       </div>
-      <div class="middle">
-        <button class="nav-button">Startseite</button>
-        <button class="nav-button">Benutzerverwaltung</button>
-        <button class="nav-button active">Autoverwaltung</button>
-        <button class="nav-button">Terminverwaltung</button>
-      </div>
-      <div class="right">
-        <button class="nav-button">Konto</button>
-        <button class="nav-button">AGB</button>
-        <button class="nav-button">Impressum</button>
-      </div>
+		<div class="middle">
+			<button class="nav-button" id="startseiteNavBarButton">Startseite</button>
+			<button class="nav-button" id="benutzerverwaltungNavBarButton">Benutzerverwaltung</button>
+			<button class="nav-button active" id="autoverwaltungNavBarButton">Autoverwaltung</button>
+			<button class="nav-button" id="terminverwaltungNavBarButton">Terminverwaltung</button>
+		</div>
+		<div class="right">
+			<button class="nav-button" id="kontoNavBarButton">Konto</button>
+			<button class="nav-button" id="agbNavBarButton">AGB</button>
+			<button class="nav-button" id="impressumNavBarButton">Impressum</button>
+		</div>
     </div>
     <div class="body">
-      <h1>Autos suchen</h1>
-      <p class="gefundene-autos">Gefundene Autos</p>
+      <h1 id="sucheAutoUeberschrift">Autos suchen</h1>
+      <p class="gefundene-autos" id="gefundeneAutos">Gefundene Autos</p>
       <div id="liste-autos" class="liste-autos"></div>
       <p id="results"></p>
     </div>

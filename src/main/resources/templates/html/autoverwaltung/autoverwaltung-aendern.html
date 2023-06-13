@@ -12,6 +12,7 @@
     <script src="javascript/anwendungsschicht/autoverwaltung/anwendungsschicht-autoverwaltung-aendern.js"></script>
     <script src="javascript/datenschicht/autoverwaltung/datenschicht-autoverwaltung-aendern.js"></script>
     <script src="javascript/praesentationsschicht/autoverwaltung/praesentationsschicht-autoverwaltung-aendern.js"></script>
+    <script src="javascript/praesentationsschicht/messages/messages.js"></script>
   </head>
   <body>
     <div class="header">
@@ -23,47 +24,47 @@
         />
       </div>
       <div class="middle">
-        <button class="nav-button">Startseite</button>
-        <button class="nav-button">Benutzerverwaltung</button>
-        <button class="nav-button active">Autoverwaltung</button>
-        <button class="nav-button">Terminverwaltung</button>
+        <button class="nav-button" id="startseiteNavBarButton">Startseite</button>
+        <button class="nav-button" id="benutzerverwaltungNavBarButton">Benutzerverwaltung</button>
+        <button class="nav-button active" id="autoverwaltungNavBarButton">Autoverwaltung</button>
+        <button class="nav-button" id="terminverwaltungNavBarButton">Terminverwaltung</button>
       </div>
       <div class="right">
-        <button class="nav-button">Konto</button>
-        <button class="nav-button">AGB</button>
-        <button class="nav-button">Impressum</button>
+        <button class="nav-button" id="kontoNavBarButton">Konto</button>
+        <button class="nav-button" id="agbNavBarButton">AGB</button>
+        <button class="nav-button" id="impressumNavBarButton">Impressum</button>
       </div>
     </div>
     <div class="body">
       <div class="ueberschrift">
-        <h1>Auto ändern</h1>
+        <h1 id="autosAendernButton">Auto ändern</h1>
       </div>
       <form id="auto-form">
         <div class="form-group">
-          <label for="id">Auto ID:</label>
+          <label for="id" id="autoIDLabel">Auto ID:</label>
           <input type="text" id="id" name="id" required />
         </div>
         <div class="form-group">
-          <label for="marke">Marke:</label>
+          <label for="marke" id="markeLabel">Marke:</label>
           <input type="text" id="marke" name="marke" />
         </div>
         <div class="form-group">
-          <label for="modell">Modell:</label>
+          <label for="modell" id="modellLabel">Modell:</label>
           <input type="text" id="modell" name="modell" />
         </div>
         <div class="form-group">
-          <label for="baujahr">Baujahr:</label>
+          <label for="baujahr" id="baujahrLabel">Baujahr:</label>
           <input type="number" id="baujahr" name="baujahr" />
         </div>
         <div class="form-group">
-          <label for="farbe">Farbe:</label>
+          <label for="farbe" id="farbeLabel">Farbe:</label>
           <input type="text" id="farbe" name="farbe" />
         </div>
         <div class="form-group">
-          <label for="preis">Preis:</label>
+          <label for="preis" id="preisLabel">Preis:</label>
           <input type="number" id="preis" name="preis" />
         </div>
-        <button type="submit">Ändern</button>
+        <button type="submit" id="aendernButton">Ändern</button>
       </form>
     </div>
   </body>

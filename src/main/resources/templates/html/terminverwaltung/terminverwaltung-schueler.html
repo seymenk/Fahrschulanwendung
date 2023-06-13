@@ -8,182 +8,34 @@
       rel="stylesheet"
       href="css/terminverwaltung/terminverwaltung-schueler.css"
     />
+    <script src="javascript/praesentationsschicht/messages/messages.js"></script>
   </head>
   <body>
     <div class="body">
-      <h1>Terminverwaltung</h1>
+      <h1 id="terminverwaltung">Terminverwaltung</h1>
       <div class="dropdown-container">
-        <label for="fahrlehrer-dropdown">Fahrlehrer:</label>
+        <label for="fahrlehrer-dropdown" id="fahrlehrerLabel">Fahrlehrer:</label>
         <select id="fahrlehrer-dropdown" onchange="enableCalendar()">
-          <option value="" selected>Wählen Sie einen Fahrlehrer</option>
+          <option value="" selected id="waehleFahrlehrer">Wählen Sie einen Fahrlehrer</option>
         </select>
       </div>
       <div class="calendar-container">
-        <label for="date-input">Datum:</label>
+        <label for="date-input" id="datum">Datum:</label>
         <input type="date" id="date-input" oninput="checkWeekday()" disabled />
         <div id="error-message" style="display: none; color: red">
           Bitte wählen Sie einen Wochentag (Montag bis Freitag) aus.
         </div>
       </div>
       <div class="time-slot-container">
-        <label for="time-slot-dropdown">Terminslot:</label>
+        <label for="time-slot-dropdown" id="terminslot">Terminslot:</label>
         <select id="time-slot-dropdown" disabled>
-          <option value="" selected>Wählen Sie einen Terminslot</option>
+          <option value="" selected id="waehleTerminslot">Wählen Sie einen Terminslot</option>
         </select>
       </div>
-      <button class="submit-button" onclick="bookTermin()">
+      <button class="submit-button" onclick="bookTermin()" id="terminBuchenButton">
         Termin buchen
       </button>
     </div>
-    <!-- <script>
-      function loadFahrlehrer() {
-        fetch("/get-alleFahrlehrer")
-          .then((response) => response.json())
-          .then((fahrlehrerList) => {
-            const fahrlehrerDropdown = document.getElementById(
-              "fahrlehrer-dropdown"
-            );
-            fahrlehrerList.forEach((fahrlehrer) => {
-              const option = document.createElement("option");
-              option.value = fahrlehrer.id;
-              option.textContent =
-                fahrlehrer.vorname + " " + fahrlehrer.nachname;
-              fahrlehrerDropdown.appendChild(option);
-            });
-          });
-      }
-
-      document.addEventListener("DOMContentLoaded", loadFahrlehrer);
-
-      function enableCalendar() {
-        const fahrlehrerDropdown = document.getElementById(
-          "fahrlehrer-dropdown"
-        );
-        const dateInput = document.getElementById("date-input");
-        if (fahrlehrerDropdown.value !== "") {
-          dateInput.disabled = false;
-        } else {
-          dateInput.disabled = true;
-        }
-        dateInput.addEventListener("input", fetchAvailableTimeSlots);
-        fetchAvailableTimeSlots();
-      }
-
-      function checkWeekday() {
-        const dateInput = document.getElementById("date-input");
-        const inputDate = new Date(dateInput.value);
-        const day = inputDate.getDay();
-        const errorMessage = document.getElementById("error-message");
-
-        // Wochenende deaktivieren: 0 für Sonntag und 6 für Samstag
-        if (day === 0 || day === 6) {
-          errorMessage.style.display = "block";
-          dateInput.value = "";
-          disableTimeSlot();
-        } else {
-          errorMessage.style.display = "none";
-          enableTimeSlot();
-        }
-      }
-
-      function disableTimeSlot() {
-        const timeSlotDropdown = document.getElementById("time-slot-dropdown");
-        timeSlotDropdown.disabled = true;
-        timeSlotDropdown.value = "";
-      }
-
-      function enableTimeSlot() {
-        const timeSlotDropdown = document.getElementById("time-slot-dropdown");
-        timeSlotDropdown.disabled = false;
-        timeSlotDropdown.value = "";
-        fetchAvailableTimeSlots();
-      }
-
-      function fetchAvailableTimeSlots() {
-        const fahrlehrerSelect = document.getElementById("fahrlehrer-dropdown");
-        const fahrlehrerID = fahrlehrerSelect.value;
-
-        const dateInput = document.getElementById("date-input");
-        const selectedDate = dateInput.value;
-
-        if (!selectedDate) {
-          return;
-        }
-
-        const data = {
-          fahrlehrerID: fahrlehrerID,
-          date: selectedDate,
-        };
-
-        fetch("/getIDandDate", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(data),
-        })
-          .then((response) => response.json())
-          .then((termine) => updateTimeslotsDropdown(termine));
-      }
-
-      function updateTimeslotsDropdown(termine) {
-        const timeSlotDropdown = document.getElementById("time-slot-dropdown");
-
-        timeSlotDropdown.innerHTML =
-          '<option value="" selected>Wählen Sie einen Terminslot</option>';
-
-        termine.forEach((termin) => {
-          const option = document.createElement("option");
-          option.value = termin.id;
-
-          const startTimeString = termin.startUhrzeit;
-          const endTimeString = termin.endUhrzeit;
-
-          option.textContent = startTimeString + " - " + endTimeString;
-          timeSlotDropdown.appendChild(option);
-        });
-      }
-
-      function bookTermin() {
-        const fahrlehrerDropdown = document.getElementById(
-          "fahrlehrer-dropdown"
-        );
-        const dateInput = document.getElementById("date-input");
-        const timeSlotDropdown = document.getElementById("time-slot-dropdown");
-
-        if (
-          fahrlehrerDropdown.value === "" ||
-          dateInput.value === "" ||
-          timeSlotDropdown.value === ""
-        ) {
-          alert("Bitte füllen Sie alle Felder aus, bevor Sie fortfahren.");
-          return;
-        }
-
-        const data = {
-          id: timeSlotDropdown.value,
-        };
-
-        fetch("/bookTermin", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(data),
-        })
-          .then((response) => response.json())
-          .then((result) => {
-            if (result.success) {
-              alert("Termin erfolgreich gebucht!");
-            } else {
-              alert(
-                "Es gab ein Problem bei der Buchung des Termins. Bitte versuchen Sie es später erneut."
-              );
-            }
-          });
-        location.reload();
-      }
-    </script> -->
     <script src="javascript/anwendungsschicht/terminverwaltung/anwendungsschicht-terminverwaltung-schueler.js"></script>
     <script src="javascript/datenschicht/terminverwaltung/datenschicht-terminverwaltung-schueler.js"></script>
     <script src="javascript/praesentationsschicht/terminverwaltung/praesentationsschicht-terminverwaltung-schueler.js"></script>

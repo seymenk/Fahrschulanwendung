@@ -1,45 +1,42 @@
 <!DOCTYPE html>
 <html lang="de">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Benutzerverwaltung</title>
-    <link
-      rel="stylesheet"
-      href="css/benutzerverwaltung/benutzerverwaltung.css"
-    />
-    <script src="javascript/anwendungsschicht/navigation/navigation.js"></script>
-    <script src="javascript/anwendungsschicht/benutzerverwaltung/anwendungsschicht-benutzerverwaltung.js"></script>
-  </head>
-  <body>
-    <div class="header">
-      <div class="left">
-        <img
-          src="path/to/your/profile-picture"
-          alt="Profilbild"
-          class="profile-picture"
-        />
-      </div>
-      <div class="middle">
-        <button class="nav-button">Startseite</button>
-        <button class="nav-button active">Benutzerverwaltung</button>
-        <button class="nav-button">Autoverwaltung</button>
-        <button class="nav-button">Terminverwaltung</button>
-      </div>
-      <div class="right">
-        <button class="nav-button">Konto</button>
-        <button class="nav-button">AGB</button>
-        <button class="nav-button">Impressum</button>
-      </div>
-    </div>
-    <div class="body">
-      <div class="optionen">
-        <button>Fahrschüler anzeigen</button>
-        <button>Fahrlehrer anzeigen</button>
-        <button>Benutzerkonto anlegen</button>
-        <button>Passwort ändern</button>
-        <button>Benutzerkonto löschen</button>
-      </div>
-    </div>
-  </body>
+
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Benutzerverwaltung</title>
+	<link rel="stylesheet" href="css/benutzerverwaltung/benutzerverwaltung.css" />
+	<script src="javascript/anwendungsschicht/navigation/navigation.js"></script>
+	<script src="javascript/anwendungsschicht/benutzerverwaltung/anwendungsschicht-benutzerverwaltung.js"></script>
+	<script src="javascript/praesentationsschicht/messages/messages.js"></script>
+</head>
+
+<body>
+	<div class="header">
+		<div class="left">
+			<img src="path/to/your/profile-picture" alt="Profilbild" class="profile-picture" />
+		</div>
+		<div class="middle">
+			<button class="nav-button" id="startseiteNavBarButton">Startseite</button>
+			<button class="nav-button active" id="benutzerverwaltungNavBarButton">Benutzerverwaltung</button>
+			<button class="nav-button" id="autoverwaltungNavBarButton">Autoverwaltung</button>
+			<button class="nav-button" id="terminverwaltungNavBarButton">Terminverwaltung</button>
+		</div>
+		<div class="right">
+			<button class="nav-button" id="kontoNavBarButton">Konto</button>
+			<button class="nav-button" id="agbNavBarButton">AGB</button>
+			<button class="nav-button" id="impressumNavBarButton">Impressum</button>
+		</div>
+	</div>
+	<div class="body">
+		<div class="optionen">
+			<button id="fahrschuelerAnzeigenButton">Fahrschüler anzeigen</button>
+			<button id="fahrlehrerAnzeigenButton">Fahrlehrer anzeigen</button>
+			<button id="benutzerkontoAnlegenButton">Benutzerkonto anlegen</button>
+			<button id="passwortAendernButton">Passwort ändern</button>
+			<button id="benutzerkontoLoeschenButton">Benutzerkonto löschen</button>
+		</div>
+	</div>
+</body>
+
 </html>

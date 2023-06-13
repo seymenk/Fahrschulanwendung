@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="css/terminverwaltung/terminverwaltung.css" />
     <script src="javascript/anwendungsschicht/navigation/navigation.js"></script>
     <script src="javascript/anwendungsschicht/terminverwaltung/anwendungsschicht-terminverwaltung.js"></script>
+    <script src="javascript/praesentationsschicht/messages/messages.js"></script>
   </head>
   <body>
     <div class="header">
@@ -18,23 +19,23 @@
         />
       </div>
       <div class="middle">
-        <button class="nav-button">Startseite</button>
-        <button class="nav-button">Benutzerverwaltung</button>
-        <button class="nav-button">Autoverwaltung</button>
-        <button class="nav-button active">Terminverwaltung</button>
-      </div>
-      <div class="right">
-        <button class="nav-button">Konto</button>
-        <button class="nav-button">AGB</button>
-        <button class="nav-button">Impressum</button>
-      </div>
+			<button class="nav-button" id="startseiteNavBarButton">Startseite</button>
+			<button class="nav-button" id="benutzerverwaltungNavBarButton">Benutzerverwaltung</button>
+			<button class="nav-button" id="autoverwaltungNavBarButton">Autoverwaltung</button>
+			<button class="nav-button active" id="terminverwaltungNavBarButton">Terminverwaltung</button>
+		</div>
+		<div class="right">
+			<button class="nav-button" id="kontoNavBarButton">Konto</button>
+			<button class="nav-button" id="agbNavBarButton">AGB</button>
+			<button class="nav-button" id="impressumNavBarButton">Impressum</button>
+		</div>
     </div>
     <div class="body">
       <div class="optionen">
-        <button>Timeslot erstellen</button>
-        <button>Meine Termine</button>
-        <button>Alle Termine</button>
-        <button>Termin löschen</button>
+        <button id="timeslotErstellenButton">Timeslot erstellen</button>
+        <button id="meineTermineButton">Meine Termine</button>
+        <button id="alleTermineButton">Alle Termine</button>
+        <button id="terminLoeschenButton">Termin löschen</button>
       </div>
     </div>
   </body>

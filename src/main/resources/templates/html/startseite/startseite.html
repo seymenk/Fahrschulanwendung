@@ -1,107 +1,92 @@
 <!DOCTYPE html>
 <html lang="de">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="css/startseite/startseite.css" />
-    <title>Startseite</title>
-    <script src="javascript/anwendungsschicht/navigation/navigation.js"></script>
-    <script src="javascript/anwendungsschicht/startseite/anwendungsschicht-startseite.js"></script>
-  </head>
-  <body>
-    <div class="header">
-      <div class="left">
-        <img
-          src="path/to/your/profile-picture"
-          alt="Profilbild"
-          class="profile-picture"
-        />
-      </div>
-      <div class="middle">
-        <button class="nav-button active">Startseite</button>
-        <button class="nav-button">Benutzerverwaltung</button>
-        <button class="nav-button">Autoverwaltung</button>
-        <button class="nav-button">Terminverwaltung</button>
-      </div>
-      <div class="right">
-        <button class="nav-button">Konto</button>
-        <button class="nav-button">AGB</button>
-        <button class="nav-button">Impressum</button>
-      </div>
-    </div>
-    <div class="body">
-      <div class="card1">
-        <div class="text-card1">
-          <h2>Die Nummer 1 im Ruhrpott!</h2>
-          <p>
-            Yo, Leute! Ihr sucht nach der freshesten Fahrschule im Pott? Dann
-            seid ihr hier genau richtig! Wir bringen euch das Fahren bei, wie
-            kein anderer. Unsere Fahrlehrer sind echt krass drauf und wissen,
-            wie's geht. Also, worauf wartet ihr noch? Checkt uns aus und werdet
-            Teil der coolsten Fahrschul-Crew im Ruhrpott!
-          </p>
-        </div>
-        <div
-          class="bg-image"
-          style="background-image: url('../bilder/Startbild.jpeg')"
-        ></div>
-      </div>
-      <div class="card2">
-        <div class="slider">
-          <img
-            class="slide active"
-            src="bilder/Bild1-Bildergalerie.jpg"
-            alt="Bild 1"
-          />
-          <img
-            class="slide"
-            src="bilder/Bild2-Bildergalerie.jpg"
-            alt="Bild 2"
-          />
-          <img
-            class="slide"
-            src="bilder/Bild3-Bildergalerie.jpg"
-            alt="Bild 3"
-          />
-          <div class="slide-info active">
-            <h3>Luxuriöses Auto</h3>
-          </div>
-          <div class="slide-info">
-            <h3>Umweltfreundlicher Hybrid</h3>
-          </div>
-          <div class="slide-info">
-            <h3>Sportlicher Flitzer</h3>
-          </div>
-          <button class="arrow arrow-left" onclick="changeSlide(-1)">
-            &lt;
-          </button>
-          <button class="arrow arrow-right" onclick="changeSlide(1)">
-            &gt;
-          </button>
-          <div class="dots">
-            <span class="dot active" onclick="jumpToSlide(0)"></span>
-            <span class="dot" onclick="jumpToSlide(1)"></span>
-            <span class="dot" onclick="jumpToSlide(2)"></span>
-          </div>
-        </div>
-      </div>
-      <div class="card3">
-        <h1>Unser Team</h1>
-        <div class="circle-container">
-          <div class="circle">
-            <img src="bilder/Seymen.jpg" alt="Bild 1" />
-            <p>Seymen Kaya</p>
-          </div>
-          <div class="circle">
-            <img src="bilder/Andre.jpg" alt="Bild 2" />
-            <p>Andrè Wilken</p>
-          </div>
-          <div class="circle">
-            <img src="bilder/Marco.jpg" alt="Bild 3" />
-            <p>Marco Rolf</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </body>
+
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<link rel="stylesheet" href="css/startseite/startseite.css" />
+	<title>Startseite</title>
+	<script src="javascript/anwendungsschicht/navigation/navigation.js"></script>
+	<script src="javascript/anwendungsschicht/startseite/anwendungsschicht-startseite.js"></script>
+	<script src="javascript/praesentationsschicht/messages/messages.js"></script>
+</head>
+
+<body>
+	<div class="header">
+		<div class="left">
+			<img src="path/to/your/profile-picture" alt="Profilbild" class="profile-picture" />
+		</div>
+		<div class="middle">
+			<button class="nav-button active" id="startseiteNavBarButton">Startseite</button>
+			<button class="nav-button" id="benutzerverwaltungNavBarButton">Benutzerverwaltung</button>
+			<button class="nav-button" id="autoverwaltungNavBarButton">Autoverwaltung</button>
+			<button class="nav-button" id="terminverwaltungNavBarButton">Terminverwaltung</button>
+		</div>
+		<div class="right">
+			<button class="nav-button" id="kontoNavBarButton">Konto</button>
+			<button class="nav-button" id="agbNavBarButton">AGB</button>
+			<button class="nav-button" id="impressumNavBarButton">Impressum</button>
+		</div>
+	</div>
+	<div class="body">
+		<div class="card1">
+			<div class="text-card1">
+				<h2 id="startseiteUeberschrift">Die Nummer 1 im Ruhrpott!</h2>
+				<p id="startseiteText">
+					Yo, Leute! Ihr sucht nach der freshesten Fahrschule im Pott? Dann
+					seid ihr hier genau richtig! Wir bringen euch das Fahren bei, wie
+					kein anderer. Unsere Fahrlehrer sind echt krass drauf und wissen,
+					wie's geht. Also, worauf wartet ihr noch? Checkt uns aus und werdet
+					Teil der coolsten Fahrschul-Crew im Ruhrpott!
+				</p>
+			</div>
+			<div class="bg-image" style="background-image: url('../bilder/Startbild.jpeg')"></div>
+		</div>
+		<div class="card2">
+			<div class="slider">
+				<img class="slide active" src="bilder/Bild1-Bildergalerie.jpg" alt="Bild 1" />
+				<img class="slide" src="bilder/Bild2-Bildergalerie.jpg" alt="Bild 2" />
+				<img class="slide" src="bilder/Bild3-Bildergalerie.jpg" alt="Bild 3" />
+				<div class="slide-info active">
+					<h3 id="auto1">Luxuriöses Auto</h3>
+				</div>
+				<div class="slide-info">
+					<h3 id="auto2">Umweltfreundlicher Hybrid</h3>
+				</div>
+				<div class="slide-info">
+					<h3 id="auto3">Sportlicher Flitzer</h3>
+				</div>
+				<button class="arrow arrow-left" onclick="changeSlide(-1)">
+					&lt;
+				</button>
+				<button class="arrow arrow-right" onclick="changeSlide(1)">
+					&gt;
+				</button>
+				<div class="dots">
+					<span class="dot active" onclick="jumpToSlide(0)"></span>
+					<span class="dot" onclick="jumpToSlide(1)"></span>
+					<span class="dot" onclick="jumpToSlide(2)"></span>
+				</div>
+			</div>
+		</div>
+		<div class="card3">
+			<h1 id="unserTeam">Unser Team</h1>
+			<div class="circle-container">
+				<div class="circle">
+					<img src="bilder/Seymen.jpg" alt="Bild 1" />
+					<p>Seymen Kaya</p>
+				</div>
+				<div class="circle">
+					<img src="bilder/Andre.jpg" alt="Bild 2" />
+					<p>Andrè Wilken</p>
+				</div>
+				<div class="circle">
+					<img src="bilder/Marco.jpg" alt="Bild 3" />
+					<p>Marco Rolf</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+
 </html>

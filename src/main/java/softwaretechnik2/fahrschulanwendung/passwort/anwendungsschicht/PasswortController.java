@@ -24,7 +24,7 @@ public class PasswortController {
 	 *
 	 * @param request Ein PasswortChangeRequest-Objekt, das die erforderlichen
 	 *                Informationen zur Änderung des Passworts enthält.
-	 * @return true, wenn die Passwortänderung erfolgreich war, false sonst.
+	 * @return true, wenn die Passwortänderung erfolgreich war, sonst false.
 	 */
 	@PostMapping("/change-password")
 	public boolean changePassword(@RequestBody PasswortChangeRequest request) {

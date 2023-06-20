@@ -15,9 +15,10 @@ import softwaretechnik2.fahrschulanwendung.session.anwendungsschicht.SessionInte
 
 import java.util.List;
 import java.util.Optional;
-import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -36,8 +37,8 @@ public class AutoController {
 	private AutoService autoService;
 
 	private final SessionInterceptor sessionInterceptor;
-
-	ResourceBundle mybundle = ResourceBundle.getBundle("systemMessages");
+	
+	private static final Logger logger = LoggerFactory.getLogger(AutoController.class);
 
 	@Autowired
 	public AutoController(AutoService autoService, SessionInterceptor sessionInterceptor) {
@@ -58,7 +59,7 @@ public class AutoController {
 	@GetMapping("/autoverwaltung")
 	public String autoverwaltung(HttpSession session, HttpServletRequest request) {
 		if (sessionInterceptor.hasUserRole(request, "fahrlehrer")) {
-			System.out.println(mybundle.getString("redirectAutoverwaltung"));
+			logger.info("An /autoverwaltung weitergeleitet.");
 			return "autoverwaltung/autoverwaltung";
 		} else
 			return "redirect:/terminverwaltung-schueler";
@@ -77,7 +78,7 @@ public class AutoController {
 	@GetMapping("/autoverwaltung-uebersicht")
 	public String autoverwaltungUebersicht(HttpSession session, HttpServletRequest request) {
 		if (sessionInterceptor.hasUserRole(request, "fahrlehrer")) {
-			System.out.println(mybundle.getString("redirectAutoverwaltungUebersicht"));
+			logger.info("An /autoverwaltung-uebersicht weitergeleitet.");
 			return "autoverwaltung/autoverwaltung-uebersicht";
 		} else
 			return "redirect:/terminverwaltung-schueler";
@@ -96,7 +97,7 @@ public class AutoController {
 	@GetMapping("/autoverwaltung-hinzufuegen")
 	public String autoverwaltungHinzufuegen(HttpSession session, HttpServletRequest request) {
 		if (sessionInterceptor.hasUserRole(request, "fahrlehrer")) {
-			System.out.println(mybundle.getString("redirectAutoverwaltungHinzufuegen"));
+			logger.info("An /autoverwaltung-hinzufuegen weitergeleitet.");
 			return "autoverwaltung/autoverwaltung-hinzufuegen";
 		} else
 			return "redirect:/terminverwaltung-schueler";
@@ -115,7 +116,7 @@ public class AutoController {
 	@GetMapping("/autoverwaltung-loeschen")
 	public String autoverwaltungLoeschen(HttpSession session, HttpServletRequest request) {
 		if (sessionInterceptor.hasUserRole(request, "fahrlehrer")) {
-			System.out.println(mybundle.getString("redirectAutoverwaltungLoeschen"));
+			logger.info("An /autoverwaltung-loeschen weitergeleitet.");
 			return "autoverwaltung/autoverwaltung-loeschen";
 		} else
 			return "redirect:/terminverwaltung-schueler";
@@ -134,7 +135,7 @@ public class AutoController {
 	@GetMapping("/autoverwaltung-aendern")
 	public String autoverwaltungAendern(HttpSession session, HttpServletRequest request) {
 		if (sessionInterceptor.hasUserRole(request, "fahrlehrer")) {
-			System.out.println(mybundle.getString("redirectAutoverwaltungAendern"));
+			logger.info("An /autoverwaltung-aendern weitergeleitet.");
 			return "autoverwaltung/autoverwaltung-aendern";
 		} else
 			return "redirect:/terminverwaltung-schueler";
@@ -152,8 +153,8 @@ public class AutoController {
 	@PostMapping("/create-auto")
 	public ResponseEntity<AutoDTO> createAuto(@RequestBody AutoDTO autoDTO) {
 		try {
+			logger.info("An /create-auto weitergeleitet.");
 			AutoDTO createdAuto = autoService.createAuto(autoDTO);
-			System.out.println(mybundle.getString("createAuto"));
 			return new ResponseEntity<>(createdAuto, HttpStatus.CREATED);
 		} catch (Exception e) {
 			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -170,9 +171,9 @@ public class AutoController {
 	@PostMapping("/change-auto")
 	public ResponseEntity<AutoDTO> updateAuto(@RequestBody AutoDTO autoDTO) {
 		try {
+			logger.info("An /change-auto weitergeleitet.");
 			AutoDTO updatedAuto = autoService.updateAuto(autoDTO);
 			if (updatedAuto != null) {
-				System.out.println(mybundle.getString("changeAuto"));
 				return new ResponseEntity<>(updatedAuto, HttpStatus.OK);
 			} else {
 				return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
@@ -194,6 +195,7 @@ public class AutoController {
 		Optional<Auto> autoData = autoRepository.findById(id);
 
 		if (autoData.isPresent()) {
+			logger.info("An /get-car weitergeleitet.");
 			AutoDTO autoDTO = autoService.convertToAutoDTO(autoData.get());
 			return new ResponseEntity<>(autoDTO, HttpStatus.OK);
 		} else {
@@ -209,6 +211,7 @@ public class AutoController {
 	public ResponseEntity<?> deleteCar(@PathVariable Long id) {
 		Optional<Auto> existingAuto = autoRepository.findById(id);
 		if (existingAuto.isPresent()) {
+			logger.info("An /cars/{id} weitergeleitet.");
 			autoService.deleteCar(id);
 			return ResponseEntity.ok().build();
 		} else {
@@ -222,6 +225,7 @@ public class AutoController {
 	@GetMapping("/getCars")
 	public ResponseEntity<List<AutoDTO>> getCars() {
 		try {
+			logger.info("An /getCars weitergeleitet.");
 			List<Auto> autos = autoRepository.findAll();
 			List<AutoDTO> autoDTOs = autos.stream().map(autoService::convertToAutoDTO).collect(Collectors.toList());
 			return new ResponseEntity<>(autoDTOs, HttpStatus.OK);

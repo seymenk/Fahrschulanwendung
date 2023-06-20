@@ -3,6 +3,8 @@ package softwaretechnik2.fahrschulanwendung.benutzer.anwendungsschicht;
 import java.util.Optional;
 
 import org.modelmapper.ModelMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,6 +27,8 @@ public class UserService {
 	private ModelMapper modelMapper;
 
 	private PasswortGenerator pwg;
+	
+	private static final Logger logger = LoggerFactory.getLogger(UserService.class);
 
 	public UserService() {
 		this.pwg = new PasswortGenerator();
@@ -37,6 +41,7 @@ public class UserService {
 	 * @return Das konvertierte UserDTO-Objekt.
 	 */
 	private UserDTO convertToDTO(User user) {
+		logger.info("User zu UserDTO konvertiert.");
         return modelMapper.map(user, UserDTO.class);
     }
 	
@@ -46,6 +51,7 @@ public class UserService {
 	 * @return Das konvertierte User-Objekt.
 	 */
 	public User convertToEntity(UserDTO userDTO) {
+		logger.info("UserDTO zu User konvertiert.");
 	    return modelMapper.map(userDTO, User.class);
 	}
 
@@ -56,6 +62,7 @@ public class UserService {
 	 * @return Das User-Objekt, wenn die Authentifizierung erfolgreich war, oder null, wenn sie fehlschlug.
 	 */
 	public User authenticate(String username, String password) {
+		logger.info("Benutzer authentifiziert.");
 		return benutzerverwaltungFassade.findByUsernameAndPassword(username, password);
 	}
 
@@ -71,6 +78,7 @@ public class UserService {
 		String uniqueUsername = getUniqueUsername(username);
 		benutzerkonto.setUsername(uniqueUsername);
 		benutzerkonto.setPassword(pwg.generateRandomPassword());
+		logger.info("Benutzerkonto erstellt.");
 		return convertToDTO(benutzerverwaltungFassade.saveUser(benutzerkonto));
 	}
 
@@ -86,6 +94,7 @@ public class UserService {
             newUsername = username + String.format("%03d", num);
             num++;
         }
+        logger.info("Einzigartigen Benutzernamen erhalten.");
         return newUsername;
     }
 
@@ -95,6 +104,7 @@ public class UserService {
 	 * @return Das gespeicherte UserDTO-Objekt.
 	 */
     public UserDTO save(User benutzerkonto) {
+    	logger.info("Benutzerkonto in Datenbank gespeichert.");
         return convertToDTO(benutzerverwaltungFassade.saveUser(benutzerkonto));
     }
 
@@ -113,7 +123,7 @@ public class UserService {
             } else if (user.getFlID() != null) {
                 benutzerverwaltungFassade.deleteFahrlehrerById(user.getFlID());
             }
-
+            logger.info("Benutzerkonto wurde gelöscht.");
             benutzerverwaltungFassade.deleteUser(user);
         }
     }
@@ -130,8 +140,10 @@ public class UserService {
         if (user != null) {
             user.setPassword(newPassword);
             benutzerverwaltungFassade.saveUser(user);
+            logger.info("Passwort geändert.");
             return true;
         }
+        logger.error("Passwort konnte nicht geändert werden.");
         return false;
     }
 }

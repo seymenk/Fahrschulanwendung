@@ -155,8 +155,10 @@ public class AutoController {
 		try {
 			logger.info("An /create-auto weitergeleitet.");
 			AutoDTO createdAuto = autoService.createAuto(autoDTO);
+			logger.info("Auto erstellt");
 			return new ResponseEntity<>(createdAuto, HttpStatus.CREATED);
 		} catch (Exception e) {
+			logger.error("Auto konnte nicht erstellt werden.");
 			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
@@ -174,11 +176,14 @@ public class AutoController {
 			logger.info("An /change-auto weitergeleitet.");
 			AutoDTO updatedAuto = autoService.updateAuto(autoDTO);
 			if (updatedAuto != null) {
+				logger.info("Auto geändert.");
 				return new ResponseEntity<>(updatedAuto, HttpStatus.OK);
 			} else {
+				logger.error("Auto konnte nicht geändert werden");
 				return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
 			}
 		} catch (Exception e) {
+			logger.error("Auto konnte nicht geändert werden");
 			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
@@ -197,8 +202,10 @@ public class AutoController {
 		if (autoData.isPresent()) {
 			logger.info("An /get-car weitergeleitet.");
 			AutoDTO autoDTO = autoService.convertToAutoDTO(autoData.get());
+			logger.info("Autos erhalten");
 			return new ResponseEntity<>(autoDTO, HttpStatus.OK);
 		} else {
+			logger.error("Autos konnten nicht aufgerufen werden.");
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 	}
@@ -213,8 +220,10 @@ public class AutoController {
 		if (existingAuto.isPresent()) {
 			logger.info("An /cars/{id} weitergeleitet.");
 			autoService.deleteCar(id);
+			logger.info("Auto gelöscht.");
 			return ResponseEntity.ok().build();
 		} else {
+			logger.error("Auto konnte nicht gelöscht werden.");
 			return ResponseEntity.notFound().build();
 		}
 	}
@@ -228,8 +237,10 @@ public class AutoController {
 			logger.info("An /getCars weitergeleitet.");
 			List<Auto> autos = autoRepository.findAll();
 			List<AutoDTO> autoDTOs = autos.stream().map(autoService::convertToAutoDTO).collect(Collectors.toList());
+			logger.info("Autos erhalten.");
 			return new ResponseEntity<>(autoDTOs, HttpStatus.OK);
 		} catch (Exception e) {
+			logger.error("Autos konnten nicht aufgerufen werden.");
 			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}

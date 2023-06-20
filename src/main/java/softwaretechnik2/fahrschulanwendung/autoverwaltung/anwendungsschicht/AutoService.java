@@ -2,6 +2,8 @@ package softwaretechnik2.fahrschulanwendung.autoverwaltung.anwendungsschicht;
 
 import java.util.Optional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +23,8 @@ public class AutoService {
 
 	@Autowired
 	private AutoDAO autoDAO;
+	
+	private static final Logger logger = LoggerFactory.getLogger(AutoService.class);
 
 	/**
 	 * Die Methode konvertiert eine Auto Instanz zu einer AutoDTO Instanz
@@ -31,8 +35,10 @@ public class AutoService {
 		AutoDTO autoDTO;
 		if (auto instanceof Automatik) {
 			autoDTO = new AutomatikDTO();
+			logger.info("Automatik Auto konvertiert zu AutomatikDTO.");
 		} else {
 			autoDTO = new ManuellDTO();
+			logger.info("Manuell Auto konvertiert zu ManuellDTO.");
 		}
 		autoDTO.setId(auto.getId());
 		autoDTO.setMarke(auto.getMarke());
@@ -53,8 +59,10 @@ public class AutoService {
 		Auto auto;
 		if (autoDTO instanceof AutomatikDTO) {
 			auto = new Automatik();
+			logger.info("AutomatikDTO Auto konvertiert zu Automatik.");
 		} else {
 			auto = new Manuell();
+			logger.info("ManuellDTO Auto konvertiert zu Manuell.");
 		}
 		auto.setId(autoDTO.getId());
 		auto.setMarke(autoDTO.getMarke());
@@ -74,6 +82,7 @@ public class AutoService {
 	public AutoDTO createAuto(AutoDTO autoDTO) {
 	    Auto auto = convertToAuto(autoDTO);
 	    Auto savedAuto = autoDAO.save(auto);
+	    logger.info("AutoDTO erstellt.");
 	    return convertToAutoDTO(savedAuto);
 	}
 
@@ -104,8 +113,10 @@ public class AutoService {
 			}
 
 			Auto savedAuto = autoDAO.save(updatedAuto);
+			logger.info("AutoDTO wurde aktualisert.");
 			return convertToAutoDTO(savedAuto);
 		} else {
+			logger.error("AutoDTO konnte nicht gelöscht werden.");
 			return null;
 		}
 	}
@@ -115,6 +126,7 @@ public class AutoService {
 	 * @param id
 	 */
 	public void deleteCar(Long id) {
+		logger.info("AutoDTO gelöscht.");
 		autoDAO.deleteById(id);
 	}
 }

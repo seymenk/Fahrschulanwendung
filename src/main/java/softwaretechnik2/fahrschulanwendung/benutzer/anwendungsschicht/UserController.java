@@ -20,7 +20,7 @@ public class UserController {
     @Autowired
     UserService userService;
     
-    private static final Logger logger = LoggerFactory.getLogger(UserController.class);
+    private final Logger logger = LoggerFactory.getLogger(UserController.class);
 
     /**
      * Löscht das Benutzerkonto aus der Datenbank, durch die Anfrage an die Service Klasse.

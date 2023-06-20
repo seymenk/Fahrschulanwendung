@@ -24,7 +24,7 @@ public class AutoService {
 	@Autowired
 	private AutoDAO autoDAO;
 	
-	private static final Logger logger = LoggerFactory.getLogger(AutoService.class);
+	private final Logger logger = LoggerFactory.getLogger(AutoService.class);
 
 	/**
 	 * Die Methode konvertiert eine Auto Instanz zu einer AutoDTO Instanz

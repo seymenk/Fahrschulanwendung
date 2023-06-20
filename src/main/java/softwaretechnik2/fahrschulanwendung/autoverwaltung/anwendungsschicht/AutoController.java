@@ -38,7 +38,7 @@ public class AutoController {
 
 	private final SessionInterceptor sessionInterceptor;
 	
-	private static final Logger logger = LoggerFactory.getLogger(AutoController.class);
+	private final Logger logger = LoggerFactory.getLogger(AutoController.class);
 
 	@Autowired
 	public AutoController(AutoService autoService, SessionInterceptor sessionInterceptor) {

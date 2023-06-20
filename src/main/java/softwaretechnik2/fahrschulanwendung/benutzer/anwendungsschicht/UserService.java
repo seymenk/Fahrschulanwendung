@@ -28,7 +28,7 @@ public class UserService {
 
 	private PasswortGenerator pwg;
 	
-	private static final Logger logger = LoggerFactory.getLogger(UserService.class);
+	private final Logger logger = LoggerFactory.getLogger(UserService.class);
 
 	public UserService() {
 		this.pwg = new PasswortGenerator();

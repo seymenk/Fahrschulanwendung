@@ -5,11 +5,15 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.ResourceBundle;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class MessagesController {
+	
+	private final Logger logger = LoggerFactory.getLogger(MessagesController.class);
 
     @GetMapping("/messages")
     public Map<String, String> getMessages() {
@@ -21,7 +25,7 @@ public class MessagesController {
             String key = keys.nextElement();
             messages.put(key, mybundle.getString(key));
         }
-
+        logger.info("Übersetzung der Seite wurde aufgerufen.");
         return messages;
     }
 }

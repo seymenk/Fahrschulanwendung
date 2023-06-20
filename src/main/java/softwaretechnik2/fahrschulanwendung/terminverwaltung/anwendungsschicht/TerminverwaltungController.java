@@ -7,6 +7,8 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -35,7 +37,9 @@ public class TerminverwaltungController {
 
 	@Autowired
 	private HttpSession httpSession;
-
+	
+	private final Logger logger = LoggerFactory.getLogger(TerminverwaltungController.class);
+	
 	@Autowired
 	public TerminverwaltungController(SessionInterceptor sessionInterceptor) {
 		this.sessionInterceptor = sessionInterceptor;
@@ -53,8 +57,10 @@ public class TerminverwaltungController {
 	 */
 	@GetMapping("/terminverwaltung")
 	public String terminverwaltung(HttpSession session, HttpServletRequest request) {
-		if (sessionInterceptor.hasUserRole(request, "fahrlehrer"))
+		if (sessionInterceptor.hasUserRole(request, "fahrlehrer")) {
+			logger.info("An /terminverwaltung weitergeleitet.");
 			return "terminverwaltung/terminverwaltung";
+		}
 		else
 			return "redirect:/startseite";
 	}
@@ -71,8 +77,10 @@ public class TerminverwaltungController {
 	 */
 	@GetMapping("/terminverwaltung-timeslot-erstellen")
 	public String terminverwaltungTimeslotErstellen(HttpSession session, HttpServletRequest request) {
-		if (sessionInterceptor.hasUserRole(request, "fahrlehrer"))
+		if (sessionInterceptor.hasUserRole(request, "fahrlehrer")) {
+			logger.info("An /terminverwaltung-timeslot-erstellen weitergeleitet.");
 			return "terminverwaltung/terminverwaltung-timeslot-erstellen";
+		}
 		else
 			return "redirect:/startseite";
 	}
@@ -89,8 +97,10 @@ public class TerminverwaltungController {
 	 */
 	@GetMapping("/terminverwaltung-meine-termine")
 	public String terminverwaltungMeineTermine(HttpSession session, HttpServletRequest request) {
-		if (sessionInterceptor.hasUserRole(request, "fahrlehrer"))
+		if (sessionInterceptor.hasUserRole(request, "fahrlehrer")) {
+			logger.info("An /terminverwaltung-meine-termine weitergeleitet.");
 			return "terminverwaltung/terminverwaltung-meine-termine";
+		}
 		else
 			return "redirect:/startseite";
 	}
@@ -107,8 +117,10 @@ public class TerminverwaltungController {
 	 */
 	@GetMapping("/terminverwaltung-alle-termine")
 	public String terminverwaltungAlleTermine(HttpSession session, HttpServletRequest request) {
-		if (sessionInterceptor.hasUserRole(request, "fahrlehrer"))
+		if (sessionInterceptor.hasUserRole(request, "fahrlehrer")) {
+			logger.info("An /terminverwaltung-alle-termine weitergeleitet.");
 			return "terminverwaltung/terminverwaltung-alle-termine";
+		}
 		else
 			return "redirect:/startseite";
 	}
@@ -125,8 +137,10 @@ public class TerminverwaltungController {
 	 */
 	@GetMapping("/terminverwaltung-loeschen")
 	public String terminverwaltungLoeschen(HttpSession session, HttpServletRequest request) {
-		if (sessionInterceptor.hasUserRole(request, "fahrlehrer"))
+		if (sessionInterceptor.hasUserRole(request, "fahrlehrer")) {
+			logger.info("An /terminverwaltung-loeschen weitergeleitet.");
 			return "terminverwaltung/terminverwaltung-loeschen";
+		}
 		else
 			return "redirect:/startseite";
 	}
@@ -143,8 +157,10 @@ public class TerminverwaltungController {
 	 */
 	@GetMapping("/terminverwaltung-schueler")
 	public String terminverwaltungSchueler(HttpSession session, HttpServletRequest request) {
-		if (sessionInterceptor.hasUserRole(request, "fahrschueler"))
+		if (sessionInterceptor.hasUserRole(request, "fahrschueler")) {
+			logger.info("An /terminverwaltung-schueler weitergeleitet.");
 			return "terminverwaltung/terminverwaltung-schueler";
+		}
 		else
 			return "redirect:/startseite";
 	}
@@ -173,7 +189,7 @@ public class TerminverwaltungController {
 		List<Termin> terminObjekte = terminDTOs.stream().map(terminDTO -> modelMapper.map(terminDTO, Termin.class))
 				.collect(Collectors.toList());
 		terminService.saveTerminSlots(terminObjekte, getFahrlehrerID());
-
+		logger.info("Terminslots erflogreich hinzugefügt.");
 		return new ResponseEntity<>("Terminslots erfolgreich hinzugefügt", HttpStatus.CREATED);
 	}
 
@@ -187,8 +203,10 @@ public class TerminverwaltungController {
 		Optional<Termin> existing = terminDAO.findById(id);
 		if (existing.isPresent()) {
 			terminService.deleteTermin(id);
+			logger.info("Termin gelöscht.");
 			return ResponseEntity.ok().build();
 		} else {
+			logger.error("Termin konnte nicht gelöscht werden.");
 			return ResponseEntity.notFound().build();
 		}
 	}
@@ -204,8 +222,10 @@ public class TerminverwaltungController {
 			List<Termin> termine = terminDAO.findByFahrlehrerID(fahrlehrerID);
 			List<TerminDTO> terminDTOs = termine.stream().map(termin -> modelMapper.map(termin, TerminDTO.class))
 					.collect(Collectors.toList());
+			logger.info("Alle Termine aufgerufen für den aktuellen Fahrlehrer.");
 			return new ResponseEntity<>(terminDTOs, HttpStatus.OK);
 		} catch (Exception e) {
+			logger.warn("Konnte keine Termine finden.");
 			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
@@ -220,8 +240,10 @@ public class TerminverwaltungController {
 			List<Termin> termine = terminDAO.findAll();
 			List<TerminDTO> terminDTOs = termine.stream().map(termin -> modelMapper.map(termin, TerminDTO.class))
 					.collect(Collectors.toList());
+			logger.info("Alle Termine aufgerufen.");
 			return new ResponseEntity<>(terminDTOs, HttpStatus.OK);
 		} catch (Exception e) {
+			logger.warn("Konnte keine Termine finden.");
 			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
@@ -248,6 +270,7 @@ public class TerminverwaltungController {
 		List<Termin> termine = terminDAO.findByFahrlehrerIDAndDatumAndGebuchtFalse(id, date);
 		List<TerminDTO> terminDTOs = termine.stream().map(termin -> modelMapper.map(termin, TerminDTO.class))
 				.collect(Collectors.toList());
+		logger.info("Alle Timeslots aufgerufen.");
 		return new ResponseEntity<>(terminDTOs, HttpStatus.OK);
 	}
 
@@ -267,11 +290,14 @@ public class TerminverwaltungController {
 	            termin.setGebucht(true);
 	            termin.setFahrschuelerID(getFahrschuelerID());
 	            terminDAO.save(termin);
+	            logger.info("Termin erfolgreich gebucht.");
 	            return ResponseEntity.ok().body(Map.of("success", true));
 	        } else {
+	        	logger.error("Termin konnte nicht gebucht werden.");
 	            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Map.of("success", false));
 	        }
 	    } catch (Exception e) {
+	    	logger.error("Termin konnte nicht gebucht werden.");
 	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Map.of("success", false));
 	    }
 	}

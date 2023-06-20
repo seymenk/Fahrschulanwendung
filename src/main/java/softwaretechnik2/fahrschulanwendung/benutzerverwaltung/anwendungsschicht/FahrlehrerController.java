@@ -22,6 +22,9 @@ import softwaretechnik2.fahrschulanwendung.benutzer.datenschicht.FahrlehrerDAO;
 import softwaretechnik2.fahrschulanwendung.benutzer.datenschicht.User;
 import softwaretechnik2.fahrschulanwendung.session.anwendungsschicht.SessionInterceptor;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
  * Controller zur Verwaltung der Fahrlehrer Klassen und HTTP Anfragen
  * @author seymen
@@ -32,6 +35,8 @@ public class FahrlehrerController {
 
 	private final FahrlehrerDAO fahrlehrerDAO;
 	private final SessionInterceptor sessionInterceptor;
+
+	private final Logger logger = LoggerFactory.getLogger(FahrlehrerController.class);
 
 	@Autowired
 	public FahrlehrerController(FahrlehrerDAO repository, SessionInterceptor sessionInterceptor) {
@@ -47,8 +52,10 @@ public class FahrlehrerController {
 	 */
 	@GetMapping("/suche-fahrlehrer")
 	public String searchFahrlehrer(HttpSession session, HttpServletRequest request) {
-		if (sessionInterceptor.hasUserRole(request, "fahrlehrer"))
+		if (sessionInterceptor.hasUserRole(request, "fahrlehrer")) {
+			logger.info("An /suche-fahrlehrer weitergeleitet.");
 			return "benutzerverwaltung/sucheFahrlehrer";
+		}
 		else
 			return "redirect:/terminverwaltung-schueler";
 	}
@@ -99,6 +106,7 @@ public class FahrlehrerController {
 		responseDTO.setVorname(fahrlehrer.getVorname());
 		responseDTO.setNachname(fahrlehrer.getNachname());
 		responseDTO.setRole("Fahrlehrer");
+		logger.info("Fahrlehrer erstellt");
 		return ResponseEntity.ok(responseDTO);
 	}
 
@@ -122,6 +130,8 @@ public class FahrlehrerController {
 
 			return dto;
 		}).collect(Collectors.toList());
+
+		logger.info("Fahrlehrer erhalten");
 
 		return fahrlehrerDTOList;
 	}

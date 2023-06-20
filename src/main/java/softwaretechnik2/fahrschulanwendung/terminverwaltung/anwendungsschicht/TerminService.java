@@ -4,6 +4,8 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +20,9 @@ import softwaretechnik2.fahrschulanwendung.terminverwaltung.datenschicht.TerminD
 public class TerminService {
 
     private final TerminDAO terminRepository;
+    
+    private final Logger logger = LoggerFactory.getLogger(TerminService.class);
+
 
     @Autowired
     public TerminService(TerminDAO terminRepository) {
@@ -39,7 +44,7 @@ public class TerminService {
             newTermin.setStartUhrzeit(termin.getStartUhrzeit());
             newTermin.setEndUhrzeit(termin.createEndUhrzeit(termin.getStartUhrzeit()));
             newTermin.setGebucht(false);
-
+            logger.info("Termine wurden in der Datenbank gespeichert.");
             return newTermin;
         }).collect(Collectors.toList());
 
@@ -51,6 +56,7 @@ public class TerminService {
      * @param id Die ID des Termins, der gelöscht werden soll.
      */
     public void deleteTermin(Long id) {
+    	logger.info("Termin wurde gelöscht");
     	terminRepository.deleteById(id);
     }
     
@@ -61,6 +67,7 @@ public class TerminService {
      * @return Liste von verfügbaren Terminen.
      */
     public List<Termin> getAvailableTimeSlots(Long fahrlehrerID, LocalDate datum) {
+    	logger.info("Verfügbare Timeslots wurden aufgerufen.");
         return terminRepository.findByFahrlehrerIDAndDatumAndGebuchtFalse(fahrlehrerID, datum);
     }
 }

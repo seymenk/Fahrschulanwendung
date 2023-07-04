@@ -22,10 +22,10 @@ public class FahrschulanwendungApplication {
 	/**
 	 * Startet die Anwendung und gibt den aktuellen Standort aus
 	 * 
-	 * @param args
+	 * @param args Main Methode
 	 */
 	public static void main(String[] args) {
-		Locale.setDefault(new Locale("en", "US"));
+		Locale.setDefault(new Locale("de", "DE"));
 		System.out.println("Standort: " + Locale.getDefault());
 		SpringApplication.run(FahrschulanwendungApplication.class, args);
 		logger.info("Projekt gestartet");

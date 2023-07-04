@@ -24,7 +24,7 @@ public class UserController {
 
     /**
      * Löscht das Benutzerkonto aus der Datenbank, durch die Anfrage an die Service Klasse.
-     * @param benutzername
+     * @param benutzername Benutzername vom Benutzer welches gelöscht werden soll
      */
     @DeleteMapping("/benutzer/{benutzername}")
     public void deleteUser(@PathVariable String benutzername) {

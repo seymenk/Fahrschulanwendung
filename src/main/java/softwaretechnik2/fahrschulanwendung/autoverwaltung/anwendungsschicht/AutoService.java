@@ -28,7 +28,7 @@ public class AutoService {
 
 	/**
 	 * Die Methode konvertiert eine Auto Instanz zu einer AutoDTO Instanz
-	 * @param auto
+	 * @param auto Auto Instanz
 	 * @return eine AutoDTO Instanz
 	 */
 	public AutoDTO convertToAutoDTO(Auto auto) {
@@ -52,7 +52,7 @@ public class AutoService {
 
 	/**
 	 * Diese Methode konvertiert eine AutoDTO Instanz zu einer Auto Instanz
-	 * @param autoDTO
+	 * @param autoDTO Auto Instanz
 	 * @return eine Auto Instanz
 	 */
 	public Auto convertToAuto(AutoDTO autoDTO) {
@@ -76,7 +76,7 @@ public class AutoService {
 
 	/**
 	 * Die Methode erstellt ein Auto
-	 * @param autoDTO
+	 * @param autoDTO Auto Instanz
 	 * @return eine Auto Instanz
 	 */
 	public AutoDTO createAuto(AutoDTO autoDTO) {
@@ -88,7 +88,7 @@ public class AutoService {
 
 	/**
 	 * Die Methode ermöglicht das bearbeiten der Auto Attribute
-	 * @param autoDTO
+	 * @param autoDTO Auto Instanz
 	 * @return eine Auto Instanz
 	 */
 	public AutoDTO updateAuto(AutoDTO autoDTO) {
@@ -123,7 +123,7 @@ public class AutoService {
 
 	/**
 	 * Die Methode löscht das Auto.
-	 * @param id
+	 * @param id ID vom Auto
 	 */
 	public void deleteCar(Long id) {
 		logger.info("AutoDTO gelöscht.");
